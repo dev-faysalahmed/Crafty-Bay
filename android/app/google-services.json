@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "1018710438594",
+    "project_id": "flutter-live-score-app",
+    "storage_bucket": "flutter-live-score-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018710438594:android:f5aff6fcc88e3b4e0fc15b",
+        "android_client_info": {
+          "package_name": "com.example.crafty_bay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa9SxEcQRnkR4C-uIOWtnC_WlUBqiHADo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018710438594:android:9c24a836b5c8b37b0fc15b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_firebase_live_score_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa9SxEcQRnkR4C-uIOWtnC_WlUBqiHADo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018710438594:android:cddc4e802a624f7d0fc15b",
+        "android_client_info": {
+          "package_name": "com.examweek5.ostad_assignment_on_exam_week_5"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa9SxEcQRnkR4C-uIOWtnC_WlUBqiHADo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
