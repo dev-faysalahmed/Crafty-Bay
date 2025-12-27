@@ -1,9 +1,10 @@
-import 'package:crafty_bay/app/extensions/localization_extension.dart';
-import 'package:crafty_bay/common/presantation/widget/language_selector.dart';
-import 'package:crafty_bay/l10n/app_localizations.dart';
+import 'package:crafty_bay/app/assets_paths.dart';
+import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../common/presantation/widget/toggle_theme_mode.dart';
+import '../widget/app_logo.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,6 +16,18 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    _moveToNextScreen();
+  }
+
+  Future<void> _moveToNextScreen()async{
+    await Future.delayed(Duration(seconds: 2));
+    Navigator.pushNamedAndRemoveUntil(context, SignUpScreen.name, (predicate)=>false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,13 +35,14 @@ class _SplashScreenState extends State<SplashScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(context.localizations.hello),
-          Text(context.localizations.name),
-          Text(context.localizations.roll),
-          LanguageSelector(),
-          ToggleThemeMode(),
+          Spacer(),
+          AppLogo(),
+          Spacer(),
+          CircularProgressIndicator(),
+          SizedBox(height: 16,),
         ],
       ),),
     );
   }
 }
+
