@@ -17,7 +17,6 @@ class _LanguageSelectorState extends State<LanguageSelector> {
     return Row(
       mainAxisAlignment: .spaceBetween,
       children: [
-        Text(context.localizations.changeLanguage),
         DropdownMenu<String>(
             initialSelection: context.read<LanguageProvider>().currentLocal.languageCode,
             dropdownMenuEntries: [

@@ -97,29 +97,197 @@ abstract class AppLocalizations {
     Locale('en')
   ];
 
-  /// No description provided for @hello.
+  /// No description provided for @signUpTitle.
   ///
   /// In en, this message translates to:
-  /// **'English2'**
-  String get hello;
+  /// **'Sign Up'**
+  String get signUpTitle;
 
-  /// No description provided for @name.
+  /// No description provided for @signUpSubTitle.
   ///
   /// In en, this message translates to:
-  /// **'Faysal'**
-  String get name;
+  /// **'Get started with your details'**
+  String get signUpSubTitle;
 
-  /// No description provided for @roll.
+  /// No description provided for @signUpTEFFirstName.
   ///
   /// In en, this message translates to:
-  /// **'29'**
-  String get roll;
+  /// **'First Name'**
+  String get signUpTEFFirstName;
 
-  /// No description provided for @changeLanguage.
+  /// No description provided for @signUpTEFLastName.
   ///
   /// In en, this message translates to:
-  /// **'Change Language'**
-  String get changeLanguage;
+  /// **'Last Name'**
+  String get signUpTEFLastName;
+
+  /// No description provided for @signUpTEFEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get signUpTEFEmail;
+
+  /// No description provided for @signUpTEFPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get signUpTEFPassword;
+
+  /// No description provided for @signUpTEFPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get signUpTEFPhone;
+
+  /// No description provided for @signUpTEFCity.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get signUpTEFCity;
+
+  /// No description provided for @signUpFilledButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUpFilledButtonText;
+
+  /// No description provided for @signUpAlreadyAccountText.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get signUpAlreadyAccountText;
+
+  /// No description provided for @signUpTextButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signUpTextButtonText;
+
+  /// No description provided for @signUpFirstNameValidator.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your first name'**
+  String get signUpFirstNameValidator;
+
+  /// No description provided for @signUpLastNameValidator.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your last name'**
+  String get signUpLastNameValidator;
+
+  /// No description provided for @signUpEmailValidator.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email'**
+  String get signUpEmailValidator;
+
+  /// No description provided for @signUpPasswordValidator.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a password'**
+  String get signUpPasswordValidator;
+
+  /// No description provided for @signUpPasswordValidator6Digit.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter minimum 6 digit password'**
+  String get signUpPasswordValidator6Digit;
+
+  /// No description provided for @signUpPhoneValidator.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a phone number'**
+  String get signUpPhoneValidator;
+
+  /// No description provided for @signUpCityValidator.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your city'**
+  String get signUpCityValidator;
+
+  /// No description provided for @signInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signInTitle;
+
+  /// No description provided for @signInSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Login your account with email and password'**
+  String get signInSubTitle;
+
+  /// No description provided for @signInTEFEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get signInTEFEmail;
+
+  /// No description provided for @signInTEFPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get signInTEFPassword;
+
+  /// No description provided for @signInFilledButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signInFilledButtonText;
+
+  /// No description provided for @signInNeedAnAccountText.
+  ///
+  /// In en, this message translates to:
+  /// **'Need an Account?'**
+  String get signInNeedAnAccountText;
+
+  /// No description provided for @signInTextButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signInTextButtonText;
+
+  /// No description provided for @signInEmailValidator.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email'**
+  String get signInEmailValidator;
+
+  /// No description provided for @signInPasswordValidator.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a password'**
+  String get signInPasswordValidator;
+
+  /// No description provided for @signInPasswordValidator6Digit.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter minimum 6 digit password'**
+  String get signInPasswordValidator6Digit;
+
+  /// No description provided for @otpVerificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter OTP Code'**
+  String get otpVerificationTitle;
+
+  /// No description provided for @otpVerificationSubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A 4 digit otp code has been sent'**
+  String get otpVerificationSubTitle;
+
+  /// No description provided for @otpVerificationFilledButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get otpVerificationFilledButtonText;
+
+  /// No description provided for @otpVerificationTextButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend Code'**
+  String get otpVerificationTextButtonText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

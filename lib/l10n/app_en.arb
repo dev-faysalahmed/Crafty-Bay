@@ -1,9 +1,39 @@
 {
 
- "hello" : "English2",
- "name" : "Faysal",
- "roll" : "29",
- "changeLanguage" : "Change Language"
+ "signUpTitle" : "Sign Up",
+ "signUpSubTitle" : "Get started with your details",
+ "signUpTEFFirstName" : "First Name",
+ "signUpTEFLastName" : "Last Name",
+ "signUpTEFEmail" : "Email",
+ "signUpTEFPassword" : "Password",
+ "signUpTEFPhone" : "Phone",
+ "signUpTEFCity" : "City",
+ "signUpFilledButtonText" : "Sign Up",
+ "signUpAlreadyAccountText" : "Already have an account?",
+ "signUpTextButtonText" : "Sign In",
+ "signUpFirstNameValidator" : "Enter your first name",
+ "signUpLastNameValidator" : "Enter your last name",
+ "signUpEmailValidator" : "Enter a valid email",
+ "signUpPasswordValidator" : "Enter a password",
+ "signUpPasswordValidator6Digit" : "Enter minimum 6 digit password",
+ "signUpPhoneValidator" : "Enter a phone number",
+ "signUpCityValidator" : "Enter your city",
+
+ "signInTitle" : "Sign In",
+ "signInSubTitle" : "Login your account with email and password",
+ "signInTEFEmail" : "Email",
+ "signInTEFPassword" : "Password",
+ "signInFilledButtonText" : "Sign In",
+ "signInNeedAnAccountText" : "Need an Account?",
+ "signInTextButtonText" : "Sign Up",
+ "signInEmailValidator" : "Enter a valid email",
+ "signInPasswordValidator" : "Enter a password",
+ "signInPasswordValidator6Digit" : "Enter minimum 6 digit password",
+
+ "otpVerificationTitle" : "Enter OTP Code",
+ "otpVerificationSubTitle" : "A 4 digit otp code has been sent",
+ "otpVerificationFilledButtonText" : "Next",
+ "otpVerificationTextButtonText" : "Resend Code"
 
 
 

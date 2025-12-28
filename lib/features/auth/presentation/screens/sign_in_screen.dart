@@ -1,4 +1,5 @@
 import 'package:crafty_bay/app/app_color.dart';
+import 'package:crafty_bay/app/extensions/localization_extension.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/otp_verification_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/widget/app_logo.dart';
@@ -19,6 +20,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
+    var localText = context.localizations;
 
     return Scaffold(
       body: SafeArea(
@@ -30,21 +32,21 @@ class _SignInScreenState extends State<SignInScreen> {
               children: [
                 AppLogo(width: 90),
                 const SizedBox(height: 8,),
-                Text('Sign In', style: textTheme.headlineMedium?.copyWith(
+                Text(localText.signInTitle, style: textTheme.headlineMedium?.copyWith(
                     fontWeight: .bold)),
                 Text(
-                  'Login your account with email and password', style: textTheme.bodyLarge, textAlign: .center,),
+                  localText.signInSubTitle, style: textTheme.bodyLarge, textAlign: .center,),
                 const SizedBox(height: 16,),
                 TextFormField(
                   textInputAction: .next,
                   keyboardType: .emailAddress,
                   decoration: InputDecoration(
-                      hintText: 'Email'
+                      hintText: localText.signInTEFEmail
                   ),
                   validator: (String? value) {
                     String inputEmail = value ?? '';
                     if (EmailValidator.validate(inputEmail) == false) {
-                      return 'Enter a valid email';
+                      return localText.signInEmailValidator;
                     }
                     return null;
                   },
@@ -54,27 +56,27 @@ class _SignInScreenState extends State<SignInScreen> {
                   textInputAction: .done,
                   obscuringCharacter: '*',
                   decoration: InputDecoration(
-                      hintText: 'Password'
+                      hintText: localText.signInTEFPassword
                   ),
                   validator: (String? value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Enter a password';
+                      return localText.signInPasswordValidator;
                     } else if (value!.length < 6) {
-                      return 'Enter minimum 6 digit password';
+                      return localText.signInPasswordValidator6Digit;
                     }
                     return null;
                   },
                 ),
                 FilledButton(
-                    onPressed: _onTabSignInButton, child: Text('Sign In')),
+                    onPressed: _onTabSignInButton, child: Text(localText.signInFilledButtonText)),
                 const SizedBox(height: 8,),
                 RichText(text: TextSpan(style: textTheme.bodyMedium,
-                    text: 'Need an account?',
+                    text: localText.signInNeedAnAccountText,
                     children: [
                       TextSpan(
                           style: TextStyle(
                               color: AppColor.themeColor, fontWeight: .bold),
-                          text: ' Sign Up',
+                          text: ' ${localText.signInTextButtonText}',
                           recognizer: TapGestureRecognizer()..onTap = _onTabSignUpButton,
                       ),
                     ]))

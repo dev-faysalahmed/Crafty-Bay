@@ -1,4 +1,5 @@
 import 'package:crafty_bay/app/app_color.dart';
+import 'package:crafty_bay/app/extensions/localization_extension.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/widget/app_logo.dart';
 import 'package:email_validator/email_validator.dart';
@@ -20,6 +21,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
 
+    var localText = context.localizations;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -31,11 +34,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 AppLogo(width: 90),
                 const SizedBox(height: 8),
                 Text(
-                  'Enter OTP Code',
+                  localText.otpVerificationTitle,
                   style: textTheme.headlineMedium?.copyWith(fontWeight: .bold),
                 ),
                 Text(
-                  'A 4 digit opt code has been sent',
+                  localText.otpVerificationSubTitle,
                   style: textTheme.bodyLarge,
                   textAlign: .center,
                 ),
@@ -59,11 +62,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   ),
                 ),
 
-                FilledButton(onPressed: _onTabNextButton, child: Text('Next')),
+                FilledButton(onPressed: _onTabNextButton, child: Text(localText.otpVerificationFilledButtonText)),
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: _onTabResendCodeButton,
-                  child: Text('Resend Code'),
+                  child: Text(localText.otpVerificationTextButtonText),
                 ),
               ],
             ),

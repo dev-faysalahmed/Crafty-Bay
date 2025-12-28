@@ -1,11 +1,36 @@
 {
+  "signUpTitle": "Registrieren",
+  "signUpSubTitle": "Starten Sie mit Ihren Angaben",
+  "signUpTEFFirstName": "Vorname",
+  "signUpTEFLastName": "Nachname",
+  "signUpTEFEmail": "E-Mail",
+  "signUpTEFPassword": "Passwort",
+  "signUpTEFPhone": "Telefonnummer",
+  "signUpTEFCity": "Stadt",
+  "signUpFilledButtonText": "Registrieren",
+  "signUpAlreadyAccountText": "Haben Sie bereits ein Konto?",
+  "signUpTextButtonText": "Anmelden",
+  "signUpFirstNameValidator": "Bitte geben Sie Ihren Vornamen ein",
+  "signUpLastNameValidator": "Bitte geben Sie Ihren Nachnamen ein",
+  "signUpEmailValidator": "Bitte eine gültige E-Mail-Adresse eingeben",
+  "signUpPasswordValidator": "Bitte ein Passwort eingeben",
+  "signUpPasswordValidator6Digit": "Bitte ein Passwort mit mindestens 6 Zeichen eingeben",
+  "signUpPhoneValidator": "Bitte eine Telefonnummer eingeben",
+  "signUpCityValidator": "Bitte geben Sie Ihre Stadt ein",
 
- "hello" : "Englisch 2",
- "name" : "Faysal",
- "roll" : "29",
- "changeLanguage" : "Sprache ändern"
+  "signInTitle": "Anmelden",
+  "signInSubTitle": "Melden Sie sich mit E-Mail und Passwort an",
+  "signInTEFEmail": "E-Mail",
+  "signInTEFPassword": "Passwort",
+  "signInFilledButtonText": "Anmelden",
+  "signInNeedAnAccountText": "Noch kein Konto?",
+  "signInTextButtonText": "Registrieren",
+  "signInEmailValidator": "Bitte eine gültige E-Mail eingeben",
+  "signInPasswordValidator": "Bitte ein Passwort eingeben",
+  "signInPasswordValidator6Digit": "Bitte ein Passwort mit mindestens 6 Zeichen eingeben",
 
-
-
-
+  "otpVerificationTitle": "OTP-Code eingeben",
+  "otpVerificationSubTitle": "Ein 4-stelliger OTP-Code wurde gesendet",
+  "otpVerificationFilledButtonText": "Weiter",
+  "otpVerificationTextButtonText": "Code erneut senden"
 }

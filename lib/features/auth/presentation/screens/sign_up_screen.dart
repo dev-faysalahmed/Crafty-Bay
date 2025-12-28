@@ -1,4 +1,5 @@
 import 'package:crafty_bay/app/app_color.dart';
+import 'package:crafty_bay/app/extensions/localization_extension.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/widget/app_logo.dart';
 import 'package:email_validator/email_validator.dart';
@@ -18,6 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
+    var localText = context.localizations;
 
     return Scaffold(
       body: SafeArea(
@@ -29,21 +31,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 AppLogo(width: 90),
                 const SizedBox(height: 8,),
-                Text('Sign Up', style: textTheme.headlineMedium?.copyWith(
+                Text(localText.signUpTitle, style: textTheme.headlineMedium?.copyWith(
                     fontWeight: .bold)),
                 Text(
-                  'Get started with your details', style: textTheme.bodyLarge,),
+                  localText.signUpSubTitle, style: textTheme.bodyLarge,),
                 const SizedBox(height: 16,),
                 TextFormField(
                   textInputAction: .next,
                   decoration: InputDecoration(
-                      hintText: 'First Name'
+                      hintText: localText.signUpTEFFirstName
                   ),
                   validator: (String? value) {
                     if (value
                         ?.trim()
                         .isEmpty ?? true) {
-                      return 'Enter your first name';
+                      return localText.signUpFirstNameValidator;
                     }
                     return null;
                   },
@@ -51,13 +53,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   textInputAction: .next,
                   decoration: InputDecoration(
-                      hintText: 'Last Name'
+                      hintText: localText.signUpTEFLastName
                   ),
                   validator: (String? value) {
                     if (value
                         ?.trim()
                         .isEmpty ?? true) {
-                      return 'Enter your last name';
+                      return localText.signUpLastNameValidator;
                     }
                     return null;
                   },
@@ -66,12 +68,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textInputAction: .next,
                   keyboardType: .emailAddress,
                   decoration: InputDecoration(
-                      hintText: 'Email'
+                      hintText: localText.signUpTEFEmail
                   ),
                   validator: (String? value) {
                     String inputEmail = value ?? '';
                     if (EmailValidator.validate(inputEmail) == false) {
-                      return 'Enter a valid email';
+                      return localText.signUpEmailValidator;
                     }
                     return null;
                   },
@@ -79,13 +81,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   textInputAction: .next,
                   decoration: InputDecoration(
-                      hintText: 'Password'
+                      hintText: localText.signUpTEFPassword
                   ),
                   validator: (String? value) {
                     if (value?.isEmpty ?? true) {
-                      return 'Enter a password';
+                      return localText.signUpPasswordValidator;
                     } else if (value!.length < 6) {
-                      return 'Enter minimum 6 digit password';
+                      return localText.signUpPasswordValidator6Digit;
                     }
                     return null;
                   },
@@ -94,13 +96,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textInputAction: .next,
                   keyboardType: .phone,
                   decoration: InputDecoration(
-                      hintText: 'Phone'
+                      hintText: localText.signUpTEFPhone
                   ),
                   validator: (String? value) {
                     if (value
                         ?.trim()
                         .isEmpty ?? true) {
-                      return 'Enter a phone number';
+                      return localText.signUpPhoneValidator;
                     }
                     return null;
                   },
@@ -108,27 +110,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 TextFormField(
                   textInputAction: .done,
                   decoration: InputDecoration(
-                      hintText: 'City'
+                      hintText: localText.signUpTEFCity
                   ),
                   validator: (String? value) {
                     if (value
                         ?.trim()
                         .isEmpty ?? true) {
-                      return 'Enter your city';
+                      return localText.signUpCityValidator;
                     }
                     return null;
                   },
                 ),
                 FilledButton(
-                    onPressed: _onTabSignUpButton, child: Text('Sign Up')),
+                    onPressed: _onTabSignUpButton, child: Text(localText.signUpFilledButtonText)),
                 const SizedBox(height: 8,),
                 RichText(text: TextSpan(style: textTheme.bodyMedium,
-                    text: 'Already have an account?',
+                    text: localText.signUpAlreadyAccountText,
                     children: [
                       TextSpan(
                           style: TextStyle(
                               color: AppColor.themeColor, fontWeight: .bold),
-                          text: ' Sign In',
+                          text: ' ${localText.signUpTextButtonText}',
                           recognizer: TapGestureRecognizer()..onTap = _onTabSignInButton,
                       ),
                     ]))
