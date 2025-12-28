@@ -280,7 +280,7 @@ abstract class AppLocalizations {
   /// No description provided for @otpVerificationFilledButtonText.
   ///
   /// In en, this message translates to:
-  /// **'Next'**
+  /// **'Verify OTP'**
   String get otpVerificationFilledButtonText;
 
   /// No description provided for @otpVerificationTextButtonText.

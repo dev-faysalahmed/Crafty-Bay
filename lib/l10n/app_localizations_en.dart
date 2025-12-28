@@ -99,7 +99,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get otpVerificationSubTitle => 'A 4 digit otp code has been sent';
 
   @override
-  String get otpVerificationFilledButtonText => 'Next';
+  String get otpVerificationFilledButtonText => 'Verify OTP';
 
   @override
   String get otpVerificationTextButtonText => 'Resend Code';

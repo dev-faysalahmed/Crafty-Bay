@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+import '../features/common/presantation/providers/main_nav_container_provider.dart';
+
 class CraftyBayApp extends StatefulWidget {
   const CraftyBayApp({super.key});
 
@@ -21,7 +23,8 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LanguageProvider()..loadInitialLanguage(),),
-        ChangeNotifierProvider(create: (context) => ThemeProvider()..loadInitialThemeMode(),)
+        ChangeNotifierProvider(create: (context) => ThemeProvider()..loadInitialThemeMode(),),
+        ChangeNotifierProvider(create: (context) => MainNavContainerProvider()),
       ],
       child: Consumer<LanguageProvider>(
         builder: (context, languageProvider, _) {

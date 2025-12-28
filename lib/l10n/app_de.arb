@@ -31,6 +31,6 @@
 
   "otpVerificationTitle": "OTP-Code eingeben",
   "otpVerificationSubTitle": "Ein 4-stelliger OTP-Code wurde gesendet",
-  "otpVerificationFilledButtonText": "Weiter",
+  "otpVerificationFilledButtonText": "OTP bestätigen",
   "otpVerificationTextButtonText": "Code erneut senden"
 }

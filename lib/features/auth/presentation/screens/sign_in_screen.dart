@@ -67,6 +67,12 @@ class _SignInScreenState extends State<SignInScreen> {
                     return null;
                   },
                 ),
+                Row(
+                  mainAxisAlignment: .end,
+                  children: [
+                    TextButton(onPressed: _onTabForgotPasswordButton, child: Text('Forgot Password?'))
+                  ],
+                ),
                 FilledButton(
                     onPressed: _onTabSignInButton, child: Text(localText.signInFilledButtonText)),
                 const SizedBox(height: 8,),
@@ -88,10 +94,13 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
+  void _onTabForgotPasswordButton(){
+    Navigator.pushNamed(context, OtpVerificationScreen.name);
+  }
   void _onTabSignUpButton() {
     Navigator.pop(context);
   }
   void _onTabSignInButton() {
-    Navigator.pushNamed(context, OtpVerificationScreen.name);
+
   }
 }

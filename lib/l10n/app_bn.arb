@@ -31,6 +31,6 @@
 
   "otpVerificationTitle": "ওটিপি কোড লিখুন",
   "otpVerificationSubTitle": "৪ সংখ্যার একটি ওটিপি কোড পাঠানো হয়েছে",
-  "otpVerificationFilledButtonText": "পরবর্তী",
+  "otpVerificationFilledButtonText": "ওটিপি যাচাই করুন",
   "otpVerificationTextButtonText": "কোড আবার পাঠান"
 }

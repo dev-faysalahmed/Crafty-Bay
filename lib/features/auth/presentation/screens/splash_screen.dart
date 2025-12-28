@@ -3,6 +3,7 @@ import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../common/presantation/screen/main_nav_holder_screen.dart';
 import '../widget/app_logo.dart';
 
 
@@ -25,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen()async{
     await Future.delayed(Duration(seconds: 2));
-    Navigator.pushNamedAndRemoveUntil(context, SignUpScreen.name, (predicate)=>false);
+    Navigator.pushNamedAndRemoveUntil(context, MainNavHolderScreen.name, (predicate)=>false);
   }
 
   @override

@@ -32,7 +32,7 @@
 
  "otpVerificationTitle" : "Enter OTP Code",
  "otpVerificationSubTitle" : "A 4 digit otp code has been sent",
- "otpVerificationFilledButtonText" : "Next",
+ "otpVerificationFilledButtonText" : "Verify OTP",
  "otpVerificationTextButtonText" : "Resend Code"
 
 
