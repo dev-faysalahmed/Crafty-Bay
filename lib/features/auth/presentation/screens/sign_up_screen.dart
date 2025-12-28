@@ -1,4 +1,5 @@
 import 'package:crafty_bay/app/app_color.dart';
+import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/widget/app_logo.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
@@ -143,6 +144,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   }
   void _onTabSignInButton() {
-
+    Navigator.pushNamed(context, SignInScreen.name);
   }
 }
