@@ -2,8 +2,7 @@ import 'package:crafty_bay/app/assets_paths.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../common/presantation/screen/main_nav_holder_screen.dart';
+import '../../../common/presentation/screen/main_nav_holder_screen.dart';
 import '../widget/app_logo.dart';
 
 

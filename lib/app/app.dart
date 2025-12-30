@@ -7,8 +7,7 @@ import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-
-import '../features/common/presantation/providers/main_nav_container_provider.dart';
+import '../features/common/presentation/providers/main_nav_container_provider.dart';
 
 class CraftyBayApp extends StatefulWidget {
   const CraftyBayApp({super.key});

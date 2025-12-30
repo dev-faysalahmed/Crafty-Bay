@@ -1,14 +1,13 @@
 import 'package:crafty_bay/app/app_color.dart';
 import 'package:crafty_bay/app/assets_paths.dart';
 import 'package:crafty_bay/app/constants.dart';
-import 'package:crafty_bay/features/common/presantation/providers/main_nav_container_provider.dart';
 import 'package:crafty_bay/features/home/presantation/widget/home_carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-
-import '../../../common/presantation/widget/category_card.dart';
-import '../../../common/presantation/widget/product_card.dart';
+import '../../../common/presentation/providers/main_nav_container_provider.dart';
+import '../../../common/presentation/widget/category_card.dart';
+import '../../../common/presentation/widget/product_card.dart';
 import '../widget/circle_icon_button.dart';
 import '../widget/product_search_field.dart';
 import '../widget/section_header.dart';

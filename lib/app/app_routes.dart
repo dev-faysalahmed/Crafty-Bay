@@ -2,9 +2,10 @@ import 'package:crafty_bay/features/auth/presentation/screens/otp_verification_s
 import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/splash_screen.dart';
+import 'package:crafty_bay/features/product/presentation/screens/product_list_by_category_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../features/common/presantation/screen/main_nav_holder_screen.dart';
+import '../features/common/presentation/screen/main_nav_holder_screen.dart';
 
 class AppRoutes {
   static Route<dynamic> routes(RouteSettings settings){
@@ -19,6 +20,8 @@ class AppRoutes {
       widget = OtpVerificationScreen();
     }else if(settings.name == MainNavHolderScreen.name){
       widget = MainNavHolderScreen();
+    }else if(settings.name == ProductListByCategoryScreen.name){
+      widget = ProductListByCategoryScreen();
     }
 
     return MaterialPageRoute(builder: (context) => widget);
