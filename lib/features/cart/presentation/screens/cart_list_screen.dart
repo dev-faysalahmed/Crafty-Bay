@@ -2,7 +2,9 @@ import 'package:crafty_bay/app/app_color.dart';
 import 'package:crafty_bay/app/assets_paths.dart';
 import 'package:crafty_bay/app/constants.dart';
 import 'package:crafty_bay/features/cart/widget/inc_dec_button.dart';
+import 'package:crafty_bay/features/common/presentation/providers/main_nav_container_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widget/cart_item.dart';
 
@@ -19,22 +21,35 @@ class _CartListScreenState extends State<CartListScreen> {
 
     final textTheme = TextTheme.of(context);
 
-    return Scaffold(
-      appBar: AppBar(title: Text('Carts')),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: .symmetric(horizontal: 8),
-              child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                return CartItem();
-              }),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        context.read<MainNavContainerProvider>().backToHome();
+      },
+      child: Scaffold(
+        appBar: AppBar(title: Row(
+          children: [
+            IconButton(onPressed: (){
+              context.read<MainNavContainerProvider>().backToHome();
+            }, icon: Icon(Icons.arrow_back_ios)),
+            Text('Carts'),
+          ],
+        )),
+        body: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: .symmetric(horizontal: 8),
+                child: ListView.builder(
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                  return CartItem();
+                }),
+              ),
             ),
-          ),
-          _buildTotalPriceAndCheckoutSection(textTheme),
-        ],
+            _buildTotalPriceAndCheckoutSection(textTheme),
+          ],
+        ),
       ),
     );
   }
