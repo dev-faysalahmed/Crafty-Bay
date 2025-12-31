@@ -75,7 +75,7 @@ class NetworkCaller{
       }else{
         // Failed
         final decodedData = jsonDecode(response.body);
-        return NetworkResponse(isSuccess: false, responseCode: statusCode, responseData: decodedData, errorMessage: decodedData['data']);
+        return NetworkResponse(isSuccess: false, responseCode: statusCode, responseData: decodedData, errorMessage: decodedData['msg']);
       }
     } on Exception catch (e) {
       return NetworkResponse(isSuccess: false, responseCode: -1, responseData: null, errorMessage: e.toString());

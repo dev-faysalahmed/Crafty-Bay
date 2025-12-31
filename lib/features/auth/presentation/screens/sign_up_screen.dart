@@ -5,10 +5,13 @@ import 'package:crafty_bay/features/auth/presentation/providers/sign_up_provider
 import 'package:crafty_bay/features/auth/presentation/screens/otp_verification_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/widget/app_logo.dart';
+import 'package:crafty_bay/features/common/presentation/widget/snack_bar_message.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../common/presentation/widget/center_circular_progress.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -102,6 +105,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     TextFormField(
                       controller: _passwordTEController,
+                      obscureText: true,
+                      obscuringCharacter: '*',
                       textInputAction: .next,
                       decoration: InputDecoration(
                         hintText: localText.signUpTEFPassword,
@@ -146,9 +151,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       builder: (context, signUpProvider, _) {
                         return Visibility(
                           visible: signUpProvider.isSignUpInProgress == false,
-                          replacement: Center(
-                            child: CircularProgressIndicator(),
-                          ),
+                          replacement: CenterCircularProgress(),
                           child: FilledButton(
                             onPressed: _onTabSignUpButton,
                             child: Text(localText.signUpFilledButtonText),
@@ -203,9 +206,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     if(isSuccess){
-      Navigator.pushNamed(context, OtpVerificationScreen.name);
+      Navigator.pushNamed(context, OtpVerificationScreen.name, arguments: _emailTEController.text.trim());
     }else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(_signUpProvider.errorMassage!)));
+      showSnackBarMessage(context, _signUpProvider.errorMassage!);
     }
   }
 
@@ -224,3 +227,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 }
+
