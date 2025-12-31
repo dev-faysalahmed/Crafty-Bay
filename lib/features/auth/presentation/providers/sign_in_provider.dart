@@ -3,7 +3,9 @@ import 'package:crafty_bay/app/urls.dart';
 import 'package:crafty_bay/core/services/network_caller.dart';
 import 'package:crafty_bay/features/auth/data/models/sign_in_params.dart';
 import 'package:crafty_bay/features/auth/data/models/sign_up_params.dart';
+import 'package:crafty_bay/features/auth/data/models/user_model.dart';
 import 'package:crafty_bay/features/auth/data/models/verify_otp_params.dart';
+import 'package:crafty_bay/features/auth/presentation/providers/auth_controller.dart';
 import 'package:flutter/cupertino.dart';
 
 class SignInProvider extends ChangeNotifier {
@@ -25,8 +27,10 @@ class SignInProvider extends ChangeNotifier {
     );
 
     if(response.isSuccess){
+      UserModel userModel = UserModel.fromJson(response.responseData['data']['user']);
+      String token = response.responseData['data']['token'];
+      await AuthController.saveUserData(token, userModel);
       isSuccess = true;
-      // TODO: save user data in share preference
       _errorMassage = null;
     }else{
       _errorMassage = response.errorMessage;
