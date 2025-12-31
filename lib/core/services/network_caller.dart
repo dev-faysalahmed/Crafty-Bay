@@ -71,7 +71,8 @@ class NetworkCaller{
         return NetworkResponse(isSuccess: true, responseCode: statusCode, responseData: decodedData);
       }else if(response.statusCode == 401){
         onUnauthorize();
-        return NetworkResponse(isSuccess: false, responseCode: statusCode, responseData: null, errorMessage: 'Un-Authorized');
+        final decodedData = jsonDecode(response.body);
+        return NetworkResponse(isSuccess: false, responseCode: statusCode, responseData: null, errorMessage: decodedData['msg']);
       }else{
         // Failed
         final decodedData = jsonDecode(response.body);
