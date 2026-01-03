@@ -2,59 +2,65 @@ import 'package:crafty_bay/app/setup_network_caller.dart';
 import 'package:crafty_bay/app/urls.dart';
 import 'package:crafty_bay/core/services/network_caller.dart';
 import 'package:crafty_bay/features/category/data/models/category_model.dart';
+import 'package:crafty_bay/features/product/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
-class CategoryListProvider extends ChangeNotifier{
-
-  final int _pageSize = 30;
+class ProductListByCategoryProvider extends ChangeNotifier {
+  final int _pageSize = 20;
   int _currentPageNo = 0;
   int? _lastPageNo;
 
   bool _initialLoading = false;
   bool _loadingMoreData = false;
 
-  final List<CategoryModel> _categoryList = [];
+  final List<ProductModel> _productList = [];
 
-  List<CategoryModel> get categoryList => _categoryList;
+  List<ProductModel> get productList => _productList;
+
   bool get initialLoading => _initialLoading;
+
   bool get moreLoading => _loadingMoreData;
 
   String? _errorMessage;
+
   String? get errorMessage => _errorMessage;
 
-  Future<bool> fetchCategoryList()async{
+  Future<bool> fetchProductList(String categoryId) async {
     bool isSuccess = false;
 
-    if(_currentPageNo == 0){
-      _categoryList.clear();
+    if (_currentPageNo == 0) {
+      _productList.clear();
       _initialLoading = true;
-    }else if(_currentPageNo < _lastPageNo!){
+    } else if (_currentPageNo < _lastPageNo!) {
       _loadingMoreData = true;
-    }else{
+    } else {
       return false;
     }
     notifyListeners();
     _currentPageNo++;
-    
-    final NetworkResponse response = await getNetworkCaller().getRequest(url: Urls.categoryListUrl(_pageSize, _currentPageNo));
 
-    if(response.isSuccess){
+    final NetworkResponse response = await getNetworkCaller().getRequest(
+      url: Urls.productsByCategoryUrl(_pageSize, _currentPageNo, categoryId),
+    );
+
+    if (response.isSuccess) {
       _lastPageNo ??= response.responseData['data']['last_page'];
 
-      List<CategoryModel> list = [];
-      for(Map<String, dynamic> category in response.responseData['data']['results']){
-        list.add(CategoryModel.fromJson(category));
+      List<ProductModel> list = [];
+      for (Map<String, dynamic> product
+          in response.responseData['data']['results']) {
+        list.add(ProductModel.fromJson(product));
       }
 
-      _categoryList.addAll(list);
+      _productList.addAll(list);
       isSuccess = true;
-    }else{
+    } else {
       _errorMessage = response.errorMessage;
     }
 
-    if(_initialLoading){
+    if (_initialLoading) {
       _initialLoading = false;
-    }else{
+    } else {
       _loadingMoreData = false;
     }
     notifyListeners();
@@ -62,10 +68,9 @@ class CategoryListProvider extends ChangeNotifier{
     return isSuccess;
   }
 
-  Future<void> loadInitialCategoryList()async{
+  Future<void> loadInitialProductList(String categoryId) async {
     _currentPageNo = 0;
     _lastPageNo = null;
-    await fetchCategoryList();
+    await fetchProductList(categoryId);
   }
-
 }

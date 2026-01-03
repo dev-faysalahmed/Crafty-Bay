@@ -1,4 +1,5 @@
 import 'package:crafty_bay/features/common/presentation/widget/rating_view.dart';
+import 'package:crafty_bay/features/product/data/models/product_model.dart';
 import 'package:crafty_bay/features/product/presentation/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +10,10 @@ import 'favourite_button.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    super.key,
+    super.key, required this.product,
   });
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -38,18 +41,18 @@ class ProductCard extends StatelessWidget {
                         topRight: .circular(8),
                         topLeft: .circular(8)
                     ),
-                    image: DecorationImage(image: AssetImage(AssetsPaths.dummyImage))
+                    image: DecorationImage(image: NetworkImage(product.photo), fit: .cover,)
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Text('Nike Shoe RG4343 - New Arrival', maxLines: 1, overflow: .ellipsis,),
+                    Text(product.title, maxLines: 1, overflow: .ellipsis,),
                     Row(
                       mainAxisAlignment: .spaceBetween,
                       children: [
-                        Text('${Constants.takaSign}2342', style: TextStyle(fontWeight: .w600, color: AppColor.themeColor),),
+                        Text('${Constants.takaSign}${product.currentPrice}', style: TextStyle(fontWeight: .w600, color: AppColor.themeColor),),
                         RatingView(),
                         FavouriteButton()
                       ],

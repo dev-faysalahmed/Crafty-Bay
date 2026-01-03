@@ -13,7 +13,7 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, ProductListByCategoryScreen.name);
+        Navigator.pushNamed(context, ProductListByCategoryScreen.name, arguments: categoryModel);
       },
       child: Column(
         children: [

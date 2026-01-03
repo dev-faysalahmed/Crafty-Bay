@@ -25,6 +25,10 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
   }
 
   void _loadMoreData(){
+    if(context.read<CategoryListProvider>().moreLoading){
+      return;
+    }
+
     if(_scrollController.position.extentBefore < 300){
       context.read<CategoryListProvider>().fetchCategoryList();
     }
@@ -60,7 +64,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                       controller: _scrollController,
                       itemCount: categoryListProvider.categoryList.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
+                        crossAxisCount: 4,
                       ),
                       itemBuilder: (context, index) {
                         return CategoryCard(categoryModel: categoryListProvider.categoryList[index],);

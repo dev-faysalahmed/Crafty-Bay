@@ -2,6 +2,7 @@ import 'package:crafty_bay/features/auth/presentation/screens/otp_verification_s
 import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/splash_screen.dart';
+import 'package:crafty_bay/features/category/data/models/category_model.dart';
 import 'package:crafty_bay/features/product/presentation/screens/product_details_screen.dart';
 import 'package:crafty_bay/features/product/presentation/screens/product_list_by_category_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,8 @@ class AppRoutes {
     }else if(settings.name == MainNavHolderScreen.name){
       widget = MainNavHolderScreen();
     }else if(settings.name == ProductListByCategoryScreen.name){
-      widget = ProductListByCategoryScreen();
+      final CategoryModel categoryModel = settings.arguments as CategoryModel;
+      widget = ProductListByCategoryScreen(categoryModel: categoryModel,);
     }else if(settings.name == ProductDetailsScreen.name){
       widget = ProductDetailsScreen();
     }
