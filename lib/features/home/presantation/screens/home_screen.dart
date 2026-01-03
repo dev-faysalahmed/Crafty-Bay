@@ -2,6 +2,8 @@ import 'package:crafty_bay/app/app_color.dart';
 import 'package:crafty_bay/app/assets_paths.dart';
 import 'package:crafty_bay/app/constants.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:crafty_bay/features/category/presentation/providers/category_list_provider.dart';
+import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
 import 'package:crafty_bay/features/home/presantation/widget/home_carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -71,12 +73,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildCategoriesList() {
     return SizedBox(
               height: 85,
-              child: ListView.separated(
-                scrollDirection: .horizontal,
-                itemCount: 8,
-                itemBuilder: (context, index) {
-                //return CategoryCard(categoryModel: null,);
-              }, separatorBuilder: (BuildContext context, int index) { return SizedBox(width: 8,); },),
+              child: Consumer<CategoryListProvider>(
+                builder: (context, categoryListProvider, _) {
+                  if(categoryListProvider.initialLoading){
+                    return CenterCircularProgress();
+                  }
+
+
+                  return ListView.separated(
+                    scrollDirection: .horizontal,
+                    itemCount: categoryListProvider.categoryList.length > 10 ? 10 : categoryListProvider.categoryList.length,
+                    itemBuilder: (context, index) {
+                    return CategoryCard(categoryModel: categoryListProvider.categoryList[index],);
+                  }, separatorBuilder: (BuildContext context, int index) { return SizedBox(width: 8,); },);
+                }
+              ),
             );
   }
 
