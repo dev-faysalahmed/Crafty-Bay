@@ -9,8 +9,8 @@ class SliderModel {
     required this.id,
     required this.photoUrl,
     required this.description,
-    this.brand,
-    this.productId,
+    required this.brand,
+    required this.productId,
   });
 
   factory SliderModel.fromJson(Map<String, dynamic> json) {
@@ -19,6 +19,7 @@ class SliderModel {
       photoUrl: json['photo_url'],
       description: json['description'],
       brand: json['brand'],
+      productId: json['product'],
     );
   }
 }
