@@ -3,7 +3,9 @@ import 'package:crafty_bay/app/app_color.dart';
 import 'package:flutter/material.dart';
 
 class ProductImageSlider extends StatefulWidget {
-  const ProductImageSlider({super.key});
+  const ProductImageSlider({super.key, required this.imagesUrls});
+
+  final List<String> imagesUrls;
 
   @override
   State<ProductImageSlider> createState() => _ProductImageSliderState();
@@ -26,14 +28,17 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
               _selectedIndex.value = index;
             },
           ),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.imagesUrls.map((image) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.grey.withAlpha(50),
                   alignment: .center,
-                  child: Text('Images $i', style: TextStyle(fontSize: 16.0)),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withAlpha(50),
+                    image: DecorationImage(image: NetworkImage(image), fit: .fitHeight),
+
+                  ),
                 );
               },
             );
@@ -51,7 +56,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                 mainAxisAlignment: .center,
                 spacing: 4,
                 children: [
-                  for(int i=0; i<5; i++)
+                  for(int i=0; i<widget.imagesUrls.length; i++)
                     Container(width: 12, height: 12, decoration: BoxDecoration(
                         color: i == selectedIndex ? AppColor.themeColor : null,
                         border: Border.all(color: Colors.grey),
