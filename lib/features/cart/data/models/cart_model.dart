@@ -5,7 +5,8 @@ class CartModel {
   final String? color;
   final String? size;
   final int currentPrice;
-  final int quantity;
+  final int selectedQuantity;
+  final int availableQuantity;
 
   CartModel({
     required this.id,
@@ -14,7 +15,8 @@ class CartModel {
     required this.color,
     required this.size,
     required this.currentPrice,
-    required this.quantity,
+    required this.selectedQuantity,
+    required this.availableQuantity,
   });
 
   factory CartModel.fromJson(Map<String, dynamic> json){
@@ -26,7 +28,9 @@ class CartModel {
         color: json['color'],
         size: json['size'],
         currentPrice: json['product']['current_price'],
-        quantity: json['quantity']
+        selectedQuantity: json['quantity'],
+        availableQuantity: json['product']['quantity'],
+
     );
   }
 }

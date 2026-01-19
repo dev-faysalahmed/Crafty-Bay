@@ -1,3 +1,4 @@
+import 'package:crafty_bay/features/cart/data/models/cart_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app/app_color.dart';
@@ -6,11 +7,15 @@ import '../../../app/constants.dart';
 import 'inc_dec_button.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({super.key});
+  const CartItem({super.key, required this.model});
+
+  final CartModel model;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
+
+    var payableAmount = model.currentPrice * model.selectedQuantity;
 
     return Card(
       elevation: 3,
@@ -21,7 +26,7 @@ class CartItem extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(4),
-            child: Image.asset(AssetsPaths.dummyImage, height: 90, width: 70,),
+            child: Image.network(model.photoUrl, height: 90, width: 70,),
           ),
           Expanded(
             child: Padding(
@@ -35,13 +40,13 @@ class CartItem extends StatelessWidget {
                           crossAxisAlignment: .start,
                           children: [
                             Text(
-                              'Nike KH3434 - New Arrival Shoe',
+                              model.title,
                               maxLines: 1,
                               overflow: .ellipsis,
                               style: textTheme.bodyLarge,
                             ),
                             Text(
-                              'Color: Black  Size: XL',
+                              'Color: ${model.color ?? '_'}  Size: ${model.size ?? '_'}',
                               style: textTheme.bodySmall?.copyWith(
                                 color: Colors.grey,
                               ),
@@ -56,13 +61,13 @@ class CartItem extends StatelessWidget {
                     mainAxisAlignment: .spaceBetween,
                     children: [
                       Text(
-                        '${Constants.takaSign}100',
+                        '${Constants.takaSign}$payableAmount',
                         style: textTheme.bodyLarge?.copyWith(
                           fontWeight: .w600,
                           color: AppColor.themeColor,
                         ),
                       ),
-                      IncDecButton(onChange: (int value) {}),
+                      IncDecButton(onChange: (int value) {}, quantity: model.selectedQuantity, maxValue: model.availableQuantity,),
                     ],
                   ),
                 ],

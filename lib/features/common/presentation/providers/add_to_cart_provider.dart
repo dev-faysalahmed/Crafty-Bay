@@ -11,7 +11,7 @@ class AddToCartProvider extends ChangeNotifier{
   String? _errorMessage;
   String?  get errorMessage => _errorMessage;
 
-  Future<bool> addToCart(String productId)async{
+  Future<bool> addToCart(String productId, int quantity)async{
     bool isSuccess = false;
 
     _addToCartInProgress = true;
@@ -19,7 +19,7 @@ class AddToCartProvider extends ChangeNotifier{
 
     Map<String, dynamic> requestBody = {
       "product" : productId,
-      "quantity" : 2,
+      "quantity" : quantity,
       //"color" : "Blue",
       //"size" : "XL"
     };

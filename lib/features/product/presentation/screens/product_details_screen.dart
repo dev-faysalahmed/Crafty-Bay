@@ -32,6 +32,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   final ProductDetailsProvider _productDetailsProvider =
       ProductDetailsProvider();
 
+  int quantity = 1;
+
   final AddToCartProvider _addToCartProvider = AddToCartProvider();
 
   @override
@@ -96,7 +98,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                             .productDetailsModel
                                             ?.quantity ??
                                         20,
-                                    onChange: (newValue) {},
+                                    onChange: (newValue) {
+                                      quantity = newValue;
+                                    }, quantity: quantity,
                                   ),
                                 ],
                               ),
@@ -209,7 +213,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Future<void> _onTapAddToCartButton() async {
     if(await AuthController.isAlreadyLoggedIn()){
       // TODO: call add to cart api
-      final bool isSuccess = await _addToCartProvider.addToCart(widget.productId, );
+      final bool isSuccess = await _addToCartProvider.addToCart(widget.productId, quantity);
       if(isSuccess){
         showSnackBarMessage(context, 'Added to cart!');
       }else{

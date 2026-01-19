@@ -61,7 +61,7 @@ class _CartListScreenState extends State<CartListScreen> {
                       child: ListView.builder(
                           itemCount: _cartListProvider.cartList.length,
                           itemBuilder: (context, index) {
-                        return CartItem();
+                        return CartItem(model: _cartListProvider.cartList[index],);
                       }),
                     ),
                   ),
