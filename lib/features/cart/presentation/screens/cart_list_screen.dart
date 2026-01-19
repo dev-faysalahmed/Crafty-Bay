@@ -1,6 +1,8 @@
 import 'package:crafty_bay/app/app_color.dart';
 import 'package:crafty_bay/app/constants.dart';
+import 'package:crafty_bay/features/cart/presentation/providers/cart_list_provider.dart';
 import 'package:crafty_bay/features/common/presentation/providers/main_nav_container_provider.dart';
+import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +16,15 @@ class CartListScreen extends StatefulWidget {
 }
 
 class _CartListScreenState extends State<CartListScreen> {
+
+  final CartListProvider _cartListProvider = CartListProvider();
+
+  @override
+  void initState() {
+    super.initState();
+    _cartListProvider.getCartList();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -24,29 +35,41 @@ class _CartListScreenState extends State<CartListScreen> {
       onPopInvokedWithResult: (didPop, result) {
         context.read<MainNavContainerProvider>().backToHome();
       },
-      child: Scaffold(
-        appBar: AppBar(title: Row(
-          children: [
-            IconButton(onPressed: (){
-              context.read<MainNavContainerProvider>().backToHome();
-            }, icon: Icon(Icons.arrow_back_ios)),
-            Text('Carts'),
-          ],
-        )),
-        body: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: .symmetric(horizontal: 8),
-                child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                  return CartItem();
-                }),
-              ),
-            ),
-            _buildTotalPriceAndCheckoutSection(textTheme),
-          ],
+      child: ChangeNotifierProvider(
+        create: (context) => _cartListProvider,
+        child: Scaffold(
+          appBar: AppBar(title: Row(
+            children: [
+              IconButton(onPressed: (){
+                context.read<MainNavContainerProvider>().backToHome();
+              }, icon: Icon(Icons.arrow_back_ios)),
+              Text('Carts'),
+            ],
+          )),
+          body: Consumer<CartListProvider>(
+            builder: (context, _, _) {
+
+              if(_cartListProvider.getCartListInProgress){
+                return CenterCircularProgress();
+              }
+
+              return Column(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: .symmetric(horizontal: 8),
+                      child: ListView.builder(
+                          itemCount: _cartListProvider.cartList.length,
+                          itemBuilder: (context, index) {
+                        return CartItem();
+                      }),
+                    ),
+                  ),
+                  _buildTotalPriceAndCheckoutSection(textTheme),
+                ],
+              );
+            }
+          ),
         ),
       ),
     );
