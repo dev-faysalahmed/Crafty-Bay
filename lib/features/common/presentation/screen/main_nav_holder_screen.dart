@@ -1,4 +1,7 @@
 import 'package:crafty_bay/app/app_color.dart';
+import 'package:crafty_bay/features/auth/presentation/providers/auth_controller.dart';
+import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:crafty_bay/features/cart/presentation/screens/cart_list_screen.dart';
 import 'package:crafty_bay/features/category/presentation/screens/category_list_screen.dart';
 import 'package:crafty_bay/features/home/presantation/providers/home_slider_provider.dart';
@@ -45,7 +48,15 @@ class _MainNavHolderScreenState extends State<MainNavHolderScreen> {
             unselectedItemColor: Colors.grey,
             selectedItemColor: AppColor.themeColor,
             currentIndex: mainNavContainerProvide.selectedIndex,
-            onTap: mainNavContainerProvide.changeItem,
+            onTap: (int index) async {
+              if(index == 2 || index ==3){
+                if(await AuthController.isAlreadyLoggedIn() == false){
+                  Navigator.pushNamed(context, SignUpScreen.name);
+                  return;
+                }
+              }
+              mainNavContainerProvide.changeItem(index);
+            },
             showUnselectedLabels: true,
             items: [
               BottomNavigationBarItem(

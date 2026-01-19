@@ -14,6 +14,8 @@ import '../features/common/presentation/providers/main_nav_container_provider.da
 class CraftyBayApp extends StatefulWidget {
   const CraftyBayApp({super.key});
 
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   State<CraftyBayApp> createState() => _CraftyBayAppState();
 }
@@ -36,6 +38,7 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
               return MaterialApp(
                 // router
                 // theme
+                navigatorKey: CraftyBayApp.navigatorKey,
                 initialRoute: SplashScreen.name,
                 onGenerateRoute: AppRoutes.routes,
                 theme: AppTheme.lightTheme,
