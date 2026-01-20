@@ -6,6 +6,7 @@ import 'package:crafty_bay/features/auth/presentation/screens/splash_screen.dart
 import 'package:crafty_bay/features/category/presentation/providers/category_list_provider.dart';
 import 'package:crafty_bay/features/common/presentation/providers/add_wish_list_provider.dart';
 import 'package:crafty_bay/features/home/presantation/providers/home_slider_provider.dart';
+import 'package:crafty_bay/features/wish_list/presentation/providers/get_wish_list_provider.dart';
 import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -32,6 +33,8 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
         ChangeNotifierProvider(create: (context) => CategoryListProvider()),
         ChangeNotifierProvider(create: (context) => HomeSliderProvider()),
         ChangeNotifierProvider(create: (context) => AddWishListProvider()),
+        ChangeNotifierProvider(create: (context) => GetWishListProvider()),
+
       ],
       child: Consumer<LanguageProvider>(
         builder: (context, languageProvider, _) {
