@@ -11,4 +11,5 @@ class Urls {
   static String productsByCategoryUrl(int pageSize, int pageNo, String categoryId) => '$_baseUrl/products?count=$pageSize&page=$pageNo&category=$categoryId';
   static String productDetailsUrl(String productId) => '$_baseUrl/products/id/$productId';
   static String updateCartItemUrl(String cartId) => '$_baseUrl/cart/$cartId';
+  static String deleteCartItemUrl(String cartId) => '$_baseUrl/cart/$cartId';
 }

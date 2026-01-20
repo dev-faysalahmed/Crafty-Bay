@@ -1,5 +1,6 @@
 import 'package:crafty_bay/features/cart/data/models/cart_model.dart';
 import 'package:crafty_bay/features/cart/presentation/providers/cart_list_provider.dart';
+import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,16 +9,21 @@ import '../../../app/assets_paths.dart';
 import '../../../app/constants.dart';
 import 'inc_dec_button.dart';
 
-class CartItem extends StatelessWidget {
+class CartItem extends StatefulWidget {
   const CartItem({super.key, required this.model});
 
   final CartModel model;
 
   @override
+  State<CartItem> createState() => _CartItemState();
+}
+
+class _CartItemState extends State<CartItem> {
+  @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
 
-    var payableAmount = model.currentPrice * model.selectedQuantity;
+    var payableAmount = widget.model.currentPrice * widget.model.selectedQuantity;
 
     return Card(
       elevation: 3,
@@ -28,7 +34,7 @@ class CartItem extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(4),
-            child: Image.network(model.photoUrl, height: 90, width: 70,),
+            child: Image.network(widget.model.photoUrl, height: 90, width: 70,),
           ),
           Expanded(
             child: Padding(
@@ -42,13 +48,13 @@ class CartItem extends StatelessWidget {
                           crossAxisAlignment: .start,
                           children: [
                             Text(
-                              model.title,
+                              widget.model.title,
                               maxLines: 1,
                               overflow: .ellipsis,
                               style: textTheme.bodyLarge,
                             ),
                             Text(
-                              'Color: ${model.color ?? '_'}  Size: ${model.size ?? '_'}',
+                              'Color: ${widget.model.color ?? '_'}  Size: ${widget.model.size ?? '_'}',
                               style: textTheme.bodySmall?.copyWith(
                                 color: Colors.grey,
                               ),
@@ -56,7 +62,20 @@ class CartItem extends StatelessWidget {
                           ],
                         ),
                       ),
-                      IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
+                      Consumer<CartListProvider>(
+                        builder: (context, provider, _) {
+
+                          if(widget.model.id == provider.deletingCartId){
+                            return SizedBox(
+                                width: 24,
+                                height: 24,
+                                child: CenterCircularProgress());
+                          }
+                          return IconButton(onPressed: () {
+                            provider.deleteCartItem(cartId: widget.model.id);
+                          }, icon: Icon(Icons.delete));
+                        }
+                      ),
                     ],
                   ),
                   Row(
@@ -71,9 +90,9 @@ class CartItem extends StatelessWidget {
                       ),
                       IncDecButton(onChange: (int value) {
 
-                        context.read<CartListProvider>().updateCartItem(cartId: model.id, quantity: value);
+                        context.read<CartListProvider>().updateCartItem(cartId: widget.model.id, quantity: value);
 
-                      }, quantity: model.selectedQuantity, maxValue: model.availableQuantity,),
+                      }, quantity: widget.model.selectedQuantity, maxValue: widget.model.availableQuantity,),
                     ],
                   ),
                 ],

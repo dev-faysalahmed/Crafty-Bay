@@ -57,30 +57,40 @@ class CartListProvider extends ChangeNotifier {
     return isSuccess;
   }
 
-  bool _updateCartItemInProgress = false;
-  bool get updateCartItemInProgress => _updateCartItemInProgress;
-
-  Future<bool> updateCartItem({required String cartId, required int quantity})async{
-    bool isSuccess = false;
-
-    _updateCartItemInProgress = true;
-    notifyListeners();
+  Future<void> updateCartItem({required String cartId, required int quantity})async{
 
     Map<String, dynamic> requestBody = {"quantity": quantity};
 
     NetworkResponse response = await getNetworkCaller().patchRequest(url: Urls.updateCartItemUrl(cartId), body: requestBody);
 
     if(response.isSuccess){
-      isSuccess = true;
       getCartList();
     }
 
-    _updateCartItemInProgress = false;
+  }
+
+  bool _deleteCartItemInProgress = false;
+  bool get deleteCartItemInProgress => _deleteCartItemInProgress;
+
+  String? _deletingCartId;
+  String? get deletingCartId => _deletingCartId;
+
+  Future<void> deleteCartItem({required String cartId})async{
+
+    _deleteCartItemInProgress = true;
+    _deletingCartId = cartId;
     notifyListeners();
 
+    NetworkResponse response = await getNetworkCaller().deleteRequest(url: Urls.deleteCartItemUrl(cartId));
+
+    _deleteCartItemInProgress = false;
+    notifyListeners();
+
+    if(response.isSuccess){
+      getCartList();
+    }
 
 
-    return isSuccess;
   }
 
 }
