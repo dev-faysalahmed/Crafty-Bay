@@ -1,5 +1,7 @@
 import 'package:crafty_bay/features/cart/data/models/cart_model.dart';
+import 'package:crafty_bay/features/cart/presentation/providers/cart_list_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../app/app_color.dart';
 import '../../../app/assets_paths.dart';
@@ -67,7 +69,11 @@ class CartItem extends StatelessWidget {
                           color: AppColor.themeColor,
                         ),
                       ),
-                      IncDecButton(onChange: (int value) {}, quantity: model.selectedQuantity, maxValue: model.availableQuantity,),
+                      IncDecButton(onChange: (int value) {
+
+                        context.read<CartListProvider>().updateCartItem(cartId: model.id, quantity: value);
+
+                      }, quantity: model.selectedQuantity, maxValue: model.availableQuantity,),
                     ],
                   ),
                 ],

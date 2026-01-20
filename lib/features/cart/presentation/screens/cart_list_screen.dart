@@ -1,5 +1,6 @@
 import 'package:crafty_bay/app/app_color.dart';
 import 'package:crafty_bay/app/constants.dart';
+import 'package:crafty_bay/features/cart/data/models/cart_model.dart';
 import 'package:crafty_bay/features/cart/presentation/providers/cart_list_provider.dart';
 import 'package:crafty_bay/features/common/presentation/providers/main_nav_container_provider.dart';
 import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
@@ -61,7 +62,7 @@ class _CartListScreenState extends State<CartListScreen> {
                       child: ListView.builder(
                           itemCount: _cartListProvider.cartList.length,
                           itemBuilder: (context, index) {
-                        return CartItem(model: _cartListProvider.cartList[index],);
+                        return CartItem(model: _cartListProvider.cartList[index]);
                       }),
                     ),
                   ),
@@ -75,35 +76,40 @@ class _CartListScreenState extends State<CartListScreen> {
     );
   }
 
-  Container _buildTotalPriceAndCheckoutSection(TextTheme textTheme) {
-    return Container(
-          padding: .all(16),
-          decoration: BoxDecoration(
-            color: AppColor.themeColor.withAlpha(40),
-            borderRadius: .only(
-              topRight: .circular(16),
-              topLeft: .circular(16),
-            )
-          ),
-          child: Row(
-            mainAxisAlignment: .spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: .start,
+  Consumer<CartListProvider> _buildTotalPriceAndCheckoutSection(TextTheme textTheme) {
+    return Consumer<CartListProvider>(
+      builder: (context, provider, _) {
+
+        return Container(
+              padding: .all(16),
+              decoration: BoxDecoration(
+                color: AppColor.themeColor.withAlpha(40),
+                borderRadius: .only(
+                  topRight: .circular(16),
+                  topLeft: .circular(16),
+                )
+              ),
+              child: Row(
+                mainAxisAlignment: .spaceBetween,
                 children: [
-                  Text('Total Price', style: textTheme.bodyLarge,),
-                  Text('${Constants.takaSign}1500', style: textTheme.titleLarge?.copyWith(
-                    fontWeight: .w600,
-                    color: AppColor.themeColor
-                  ),),
+                  Column(
+                    crossAxisAlignment: .start,
+                    children: [
+                      Text('Total Price', style: textTheme.bodyLarge,),
+                      Text('${Constants.takaSign}${provider.totalPayableAmount}', style: textTheme.titleLarge?.copyWith(
+                        fontWeight: .w600,
+                        color: AppColor.themeColor
+                      ),),
+                    ],
+                  ),
+                  SizedBox(
+                      width: 120,
+                      child: FilledButton(onPressed: (){}, child: Text('Checkout')))
                 ],
               ),
-              SizedBox(
-                  width: 120,
-                  child: FilledButton(onPressed: (){}, child: Text('Checkout')))
-            ],
-          ),
-        );
+            );
+      }
+    );
   }
 }
 

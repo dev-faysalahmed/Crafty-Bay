@@ -85,6 +85,45 @@ class NetworkCaller{
 
   }
 
+   Future<NetworkResponse> patchRequest({required String url, Map<String, dynamic>? body})async{
+
+     try {
+       Uri uri = Uri.parse(url);
+
+       _logRequest(url, body: body);
+       Response response = await patch(
+           uri,
+           headers: header ?? {
+             'content-type' : 'application/json',
+           },
+           body: jsonEncode(body)
+       );
+
+       _logResponse(url, response);
+
+       final int statusCode = response.statusCode;
+
+       if(statusCode == 200 || statusCode == 201){
+         // Success
+         final decodedData = jsonDecode(response.body);
+         return NetworkResponse(isSuccess: true, responseCode: statusCode, responseData: decodedData);
+       }else if(response.statusCode == 401){
+         onUnauthorize();
+         final decodedData = jsonDecode(response.body);
+         return NetworkResponse(isSuccess: false, responseCode: statusCode, responseData: null, errorMessage: decodedData['msg']);
+       }else{
+         // Failed
+         final decodedData = jsonDecode(response.body);
+         return NetworkResponse(isSuccess: false, responseCode: statusCode, responseData: decodedData, errorMessage: decodedData['msg']);
+       }
+     } on Exception catch (e) {
+       return NetworkResponse(isSuccess: false, responseCode: -1, responseData: null, errorMessage: e.toString());
+     }
+
+
+   }
+
+
    void _logRequest(String url, {Map<String, dynamic>? body}){
     _logger.i('URL => $url\n'
         'RequestBody => $body');
