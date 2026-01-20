@@ -111,7 +111,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     onPressed: () {},
                                     child: Text('Reviews'),
                                   ),
-                                  FavouriteButton(),
+                                  FavouriteButton(productId: widget.productId,),
                                 ],
                               ),
                               if (_productDetailsProvider.productDetailsModel?.colors.isNotEmpty ?? false)

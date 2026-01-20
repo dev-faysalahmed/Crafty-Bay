@@ -7,9 +7,11 @@ class Urls {
   static const String homeSliderUrl = '$_baseUrl/slides';
   static const String addToCartUrl = '$_baseUrl/cart';
   static const String getCartListUrl = '$_baseUrl/cart';
+  static const String addWishListUrl = '$_baseUrl/wishlist';
   static  String categoryListUrl(int pageSize, int pageNo) => '$_baseUrl/categories?count=$pageSize&page=$pageNo';
   static String productsByCategoryUrl(int pageSize, int pageNo, String categoryId) => '$_baseUrl/products?count=$pageSize&page=$pageNo&category=$categoryId';
   static String productDetailsUrl(String productId) => '$_baseUrl/products/id/$productId';
   static String updateCartItemUrl(String cartId) => '$_baseUrl/cart/$cartId';
   static String deleteCartItemUrl(String cartId) => '$_baseUrl/cart/$cartId';
+
 }

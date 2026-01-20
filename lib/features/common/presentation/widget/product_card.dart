@@ -1,4 +1,5 @@
 import 'package:crafty_bay/features/common/presentation/widget/rating_view.dart';
+import 'package:crafty_bay/features/common/presentation/widget/snack_bar_message.dart';
 import 'package:crafty_bay/features/product/data/models/product_model.dart';
 import 'package:crafty_bay/features/product/presentation/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class ProductCard extends StatelessWidget {
                       children: [
                         Text('${Constants.takaSign}${product.currentPrice}', style: TextStyle(fontWeight: .w600, color: AppColor.themeColor),),
                         RatingView(),
-                        FavouriteButton()
+                        FavouriteButton(productId: product.id,)
                       ],
                     ),
                   ],
