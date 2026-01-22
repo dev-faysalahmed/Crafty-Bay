@@ -7,14 +7,16 @@ import 'package:flutter/material.dart';
 import '../../../../app/app_color.dart';
 import '../../../../app/assets_paths.dart';
 import '../../../../app/constants.dart';
+import '../../../auth/presentation/providers/auth_controller.dart';
 import 'favourite_button.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    super.key, required this.product,
+    super.key, required this.product, required this.onTapFavourite,
   });
 
   final ProductModel product;
+  final VoidCallback onTapFavourite;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,7 @@ class ProductCard extends StatelessWidget {
                       children: [
                         Text('${Constants.takaSign}${product.currentPrice}', style: TextStyle(fontWeight: .w600, color: AppColor.themeColor),),
                         RatingView(),
-                        FavouriteButton(productId: product.id,)
+                        FavouriteButton(productId: product.id, onTapFavoriteIcon: onTapFavourite)
                       ],
                     ),
                   ],
@@ -67,5 +69,7 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
+
+
 }
 

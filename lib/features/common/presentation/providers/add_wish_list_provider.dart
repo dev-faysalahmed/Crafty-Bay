@@ -11,8 +11,12 @@ class AddWishListProvider extends ChangeNotifier{
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
+  String? _selectedId;
+  String? get selectedId => _selectedId;
+
   Future<bool> addWishList({required String productId})async{
     bool isSuccess = false;
+    _selectedId = productId;
 
     _addWishListInProgress = true;
     notifyListeners();

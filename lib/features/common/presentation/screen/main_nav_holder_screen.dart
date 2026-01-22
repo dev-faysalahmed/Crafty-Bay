@@ -36,8 +36,8 @@ class _MainNavHolderScreenState extends State<MainNavHolderScreen> {
   void initState() {
     super.initState();
     context.read<CategoryListProvider>().fetchCategoryList();
+    context.read<GetWishListProvider>().fetchWishList();
     context.read<HomeSliderProvider>().getHomeSlider();
-    context.read<GetWishListProvider>().getWishList();
   }
 
   @override

@@ -3,6 +3,7 @@ import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dar
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:crafty_bay/features/cart/widget/inc_dec_button.dart';
 import 'package:crafty_bay/features/common/presentation/providers/add_to_cart_provider.dart';
+import 'package:crafty_bay/features/common/presentation/providers/add_wish_list_provider.dart';
 import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
 import 'package:crafty_bay/features/common/presentation/widget/favourite_button.dart';
 import 'package:crafty_bay/features/common/presentation/widget/rating_view.dart';
@@ -11,6 +12,7 @@ import 'package:crafty_bay/features/product/presentation/providers/product_detai
 import 'package:crafty_bay/features/product/widgets/color_picker.dart';
 import 'package:crafty_bay/features/product/widgets/product_image_slider.dart';
 import 'package:crafty_bay/features/product/widgets/size_picker.dart';
+import 'package:crafty_bay/features/wish_list/presentation/providers/get_wish_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -111,7 +113,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     onPressed: () {},
                                     child: Text('Reviews'),
                                   ),
-                                  FavouriteButton(productId: widget.productId,),
+                                  FavouriteButton(productId: widget.productId, onTapFavoriteIcon: _onTapAddWishList,),
                                 ],
                               ),
                               if (_productDetailsProvider.productDetailsModel?.colors.isNotEmpty ?? false)
@@ -218,6 +220,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         showSnackBarMessage(context, 'Added to cart!');
       }else{
         showSnackBarMessage(context, _addToCartProvider.errorMessage!);
+      }
+    }else{
+      Navigator.pushNamed(context, SignUpScreen.name);
+    }
+  }
+
+  Future<void> _onTapAddWishList() async {
+    if(await AuthController.isAlreadyLoggedIn()){
+      final bool isSuccess = await context.read<AddWishListProvider>().addWishList(productId: widget.productId);
+      if(isSuccess){
+        showSnackBarMessage(context, 'Added to wish list!');
+      }else{
+        showSnackBarMessage(context, context.read<AddWishListProvider>().errorMessage!);
       }
     }else{
       Navigator.pushNamed(context, SignUpScreen.name);

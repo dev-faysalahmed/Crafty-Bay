@@ -5,7 +5,11 @@ import 'package:crafty_bay/features/product/presentation/providers/product_list_
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../auth/presentation/providers/auth_controller.dart';
+import '../../../auth/presentation/screens/sign_up_screen.dart';
+import '../../../common/presentation/providers/add_wish_list_provider.dart';
 import '../../../common/presentation/widget/product_card.dart';
+import '../../../common/presentation/widget/snack_bar_message.dart';
 
 class ProductListByCategoryScreen extends StatefulWidget {
   const ProductListByCategoryScreen({super.key, required this.categoryModel});
@@ -65,7 +69,7 @@ class _ProductListByCategoryScreenState
                 ),
                 itemBuilder: (context, index) {
                   final product = _productListByCategoryProvider.productList[index];
-                  return FittedBox(child: ProductCard(product: product));
+                  return FittedBox(child: ProductCard(product: product, onTapFavourite: _onTapAddWishList,));
                 },
               ),
             );
@@ -73,5 +77,18 @@ class _ProductListByCategoryScreenState
         ),
       ),
     );
+  }
+
+  Future<void> _onTapAddWishList() async {
+    if(await AuthController.isAlreadyLoggedIn()){
+      final bool isSuccess = await context.read<AddWishListProvider>().addWishList(productId: widget.categoryModel.id);
+      if(isSuccess){
+        showSnackBarMessage(context, 'Added to wish list!');
+      }else{
+        showSnackBarMessage(context, context.read<AddWishListProvider>().errorMessage!);
+      }
+    }else{
+      Navigator.pushNamed(context, SignUpScreen.name);
+    }
   }
 }
