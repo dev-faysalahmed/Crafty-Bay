@@ -79,7 +79,7 @@ class _WishListScreenState extends State<WishListScreen> {
                         ),
                         itemBuilder: (context, index) {
                           WishListModel model = provider.wishList[index];
-                          return FittedBox(child: ProductCard(product: model.productModel, onTapFavourite: () => onTapFavouriteIcon(wishListId: model.id), fromWishList: true, wishListId: model.id,));
+                          return FittedBox(child: ProductCard(product: model.productModel, onTapFavourite: () => onTapFavouriteIcon(wishListId: model.id, deleteProductId: model.productModel.id), fromWishList: true, wishListId: model.id,));
                         },
                       );
                     }
@@ -95,7 +95,12 @@ class _WishListScreenState extends State<WishListScreen> {
     );
   }
 
-  void onTapFavouriteIcon({required String wishListId}){
-    context.read<WishListProvider>().deleteWishListItem(wishListId: wishListId);
+  Future<void> onTapFavouriteIcon({required String wishListId, required String deleteProductId}) async {
+    bool isSuccess = await context.read<WishListProvider>().deleteWishListItem(wishListId: wishListId, deleteProductId: deleteProductId);
+
+    if(isSuccess){
+      showSnackBarMessage(context, 'Delete from Wishlist!');
+      context.read<WishListProvider>().loadInitialWishList();
+    }
   }
 }

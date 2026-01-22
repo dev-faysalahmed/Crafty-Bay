@@ -55,10 +55,12 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                 return Consumer<WishListProvider>(
                   builder: (context, provider, _) {
                     if(provider.wishListItemDeleteInProgress){
-                      return SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: Center(child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2,),));
+                      if(provider.deleteProductId == widget.productId){
+                        return SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: Center(child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2,),));
+                      }
                     }
                     return Icon(Icons.favorite_border_outlined, color: Colors.white, size: 18,);
                   }

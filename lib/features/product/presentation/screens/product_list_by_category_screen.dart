@@ -69,7 +69,7 @@ class _ProductListByCategoryScreenState
                 ),
                 itemBuilder: (context, index) {
                   final product = _productListByCategoryProvider.productList[index];
-                  return FittedBox(child: ProductCard(product: product, onTapFavourite: _onTapAddWishList, fromWishList: false));
+                  return FittedBox(child: ProductCard(product: product, onTapFavourite: ()=> _onTapAddWishList(productId: product.id), fromWishList: false));
                 },
               ),
             );
@@ -79,9 +79,9 @@ class _ProductListByCategoryScreenState
     );
   }
 
-  Future<void> _onTapAddWishList() async {
+  Future<void> _onTapAddWishList({required String productId}) async {
     if(await AuthController.isAlreadyLoggedIn()){
-      final bool isSuccess = await context.read<AddWishListProvider>().addWishList(productId: widget.categoryModel.id);
+      final bool isSuccess = await context.read<AddWishListProvider>().addWishList(productId: productId);
       if(isSuccess){
         showSnackBarMessage(context, 'Added to wish list!');
       }else{

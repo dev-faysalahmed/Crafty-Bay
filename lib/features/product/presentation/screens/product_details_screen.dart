@@ -232,7 +232,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Future<void> _onTapAddWishList() async {
 
     if(widget.fromWishList){
-      bool isSuccess = await context.read<WishListProvider>().deleteWishListItem(wishListId: widget.wishListId!);
+      bool isSuccess = await context.read<WishListProvider>().deleteWishListItem(wishListId: widget.wishListId!, deleteProductId: widget.productId,);
       if(isSuccess){
         showSnackBarMessage(context, 'Delete from Wishlist!');
         context.read<WishListProvider>().loadInitialWishList();

@@ -71,8 +71,12 @@ class WishListProvider extends ChangeNotifier{
 
   bool _wishListItemDeleteInProgress = false;
   bool get wishListItemDeleteInProgress => _wishListItemDeleteInProgress;
-  
-  Future<bool> deleteWishListItem({required String wishListId})async{
+
+  String? _deleteProductId;
+  String? get deleteProductId => _deleteProductId;
+
+  Future<bool> deleteWishListItem({required String wishListId, required String deleteProductId})async{
+    _deleteProductId = deleteProductId;
     bool isSuccess = false;
     _wishListItemDeleteInProgress = true;
     notifyListeners();
