@@ -5,9 +5,9 @@ import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dar
 import 'package:crafty_bay/features/category/data/models/category_model.dart';
 import 'package:crafty_bay/features/category/presentation/providers/category_list_provider.dart';
 import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
-import 'package:crafty_bay/features/home/presantation/providers/product_list_by_slug_provider.dart';
+import 'package:crafty_bay/features/product/presentation/providers/product_list_by_slug_provider.dart';
 import 'package:crafty_bay/features/home/presantation/providers/home_slider_provider.dart';
-import 'package:crafty_bay/features/home/presantation/screens/product_list_by_slug_screen.dart';
+import 'package:crafty_bay/features/product/presentation/screens/product_list_by_slug_screen.dart';
 import 'package:crafty_bay/features/home/presantation/widget/home_carousel_slider.dart';
 import 'package:crafty_bay/features/product/data/models/product_model.dart';
 import 'package:crafty_bay/features/product/presentation/screens/product_list_by_category_screen.dart';

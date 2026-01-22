@@ -5,7 +5,7 @@ import 'package:crafty_bay/app/providers/theme_provider.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/splash_screen.dart';
 import 'package:crafty_bay/features/category/presentation/providers/category_list_provider.dart';
 import 'package:crafty_bay/features/common/presentation/providers/add_wish_list_provider.dart';
-import 'package:crafty_bay/features/home/presantation/providers/product_list_by_slug_provider.dart';
+import 'package:crafty_bay/features/product/presentation/providers/product_list_by_slug_provider.dart';
 import 'package:crafty_bay/features/home/presantation/providers/home_slider_provider.dart';
 import 'package:crafty_bay/features/wish_list/presentation/providers/wish_list_provider.dart';
 import 'package:crafty_bay/l10n/app_localizations.dart';

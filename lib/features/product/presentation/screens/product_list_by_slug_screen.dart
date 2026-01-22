@@ -1,7 +1,7 @@
 
 import 'package:crafty_bay/features/category/data/models/category_model.dart';
 import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
-import 'package:crafty_bay/features/home/presantation/providers/product_list_by_slug_provider.dart';
+import 'package:crafty_bay/features/product/presentation/providers/product_list_by_slug_provider.dart';
 import 'package:crafty_bay/features/product/presentation/providers/product_list_by_category_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

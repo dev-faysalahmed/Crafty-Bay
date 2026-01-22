@@ -3,7 +3,7 @@ import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dar
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/splash_screen.dart';
 import 'package:crafty_bay/features/category/data/models/category_model.dart';
-import 'package:crafty_bay/features/home/presantation/screens/product_list_by_slug_screen.dart';
+import 'package:crafty_bay/features/product/presentation/screens/product_list_by_slug_screen.dart';
 import 'package:crafty_bay/features/product/presentation/screens/product_details_screen.dart';
 import 'package:crafty_bay/features/product/presentation/screens/product_list_by_category_screen.dart';
 import 'package:flutter/material.dart';
