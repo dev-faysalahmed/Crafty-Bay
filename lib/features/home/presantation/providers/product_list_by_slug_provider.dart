@@ -5,7 +5,7 @@ import '../../../../app/setup_network_caller.dart';
 import '../../../../app/urls.dart';
 import '../../../../core/services/network_caller.dart';
 
-class GetPopularItemProvider extends ChangeNotifier{
+class ProductListBySlugProvider extends ChangeNotifier{
 
   // যেহেতু read product by slug api কাজ করছে না। সুতরাং Categories থেকে Popular category এর ID নিয়ে কাজ করা হয়েছে।
 
@@ -25,7 +25,7 @@ class GetPopularItemProvider extends ChangeNotifier{
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  Future<bool> fetchPopularProductList()async{
+  Future<bool> fetchPopularProductList(String slug)async{
     bool isSuccess = false;
 
     if(_currentPageNo == 0){
@@ -39,7 +39,7 @@ class GetPopularItemProvider extends ChangeNotifier{
     notifyListeners();
     _currentPageNo++;
 
-    final NetworkResponse response = await getNetworkCaller().getRequest(url: Urls.getProductListBySlugUrl(_pageSize, _currentPageNo, "67c35af85e8a445235de197b"));
+    final NetworkResponse response = await getNetworkCaller().getRequest(url: Urls.getProductListBySlugUrl(_pageSize, _currentPageNo, slug));
 
     if(response.isSuccess){
       _lastPageNo ??= response.responseData['data']['last_page'];
@@ -65,9 +65,9 @@ class GetPopularItemProvider extends ChangeNotifier{
     return isSuccess;
   }
 
-  Future<void> loadInitialPopularList()async{
+  Future<void> loadInitialPopularList(String slug)async{
     _currentPageNo = 0;
     _lastPageNo = null;
-    await fetchPopularProductList();
+    await fetchPopularProductList(slug);
   }
 }

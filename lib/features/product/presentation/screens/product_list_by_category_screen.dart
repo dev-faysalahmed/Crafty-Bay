@@ -12,10 +12,11 @@ import '../../../common/presentation/widget/product_card.dart';
 import '../../../common/presentation/widget/snack_bar_message.dart';
 
 class ProductListByCategoryScreen extends StatefulWidget {
-  const ProductListByCategoryScreen({super.key, required this.categoryModel});
+  const ProductListByCategoryScreen({super.key, required this.categoryModel, this.slug});
 
   static final String name = '/product-list-by-category';
   final CategoryModel categoryModel;
+  final String? slug;
 
   @override
   State<ProductListByCategoryScreen> createState() =>

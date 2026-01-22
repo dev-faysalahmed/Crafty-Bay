@@ -2,12 +2,15 @@ import 'package:crafty_bay/app/app_color.dart';
 import 'package:crafty_bay/app/assets_paths.dart';
 import 'package:crafty_bay/app/constants.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:crafty_bay/features/category/data/models/category_model.dart';
 import 'package:crafty_bay/features/category/presentation/providers/category_list_provider.dart';
 import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
-import 'package:crafty_bay/features/home/presantation/providers/get_popular_item_provider.dart';
+import 'package:crafty_bay/features/home/presantation/providers/product_list_by_slug_provider.dart';
 import 'package:crafty_bay/features/home/presantation/providers/home_slider_provider.dart';
+import 'package:crafty_bay/features/home/presantation/screens/product_list_by_slug_screen.dart';
 import 'package:crafty_bay/features/home/presantation/widget/home_carousel_slider.dart';
 import 'package:crafty_bay/features/product/data/models/product_model.dart';
+import 'package:crafty_bay/features/product/presentation/screens/product_list_by_category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +33,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,14 +66,20 @@ class _HomeScreenState extends State<HomeScreen> {
               }),
               _buildCategoriesList(),
               SectionHeader(title: 'Popular', onTapSeeAll: () {
-
+                Map<String, dynamic> map = {"title":"Popular", "slug":"67c35af85e8a445235de197b"};
+                Navigator.pushNamed(context, ProductListBySlugScreen.name, arguments: map);
               }),
               _buildPopularProductList(),
               SectionHeader(title: 'Special', onTapSeeAll: () {
-
+                Map<String, dynamic> map = {"title":"Special", "slug":"67c35b395e8a445235de197e"};
+                Navigator.pushNamed(context, ProductListBySlugScreen.name, arguments: map);
               }),
               _buildPopularProductList(),
-              SectionHeader(title: 'New', onTapSeeAll: () {}),
+              SectionHeader(title: 'New', onTapSeeAll: () {
+                Map<String, dynamic> map = {"title":"New Arrival", "slug":"67c7bec4623a876bc4766fea"};
+                Navigator.pushNamed(context, ProductListBySlugScreen.name, arguments: map);
+
+              }),
               _buildPopularProductList(),
 
             ],
@@ -76,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildPopularProductList() {
     return SizedBox(
               height: 170,
-              child: Consumer<GetPopularItemProvider>(
+              child: Consumer<ProductListBySlugProvider>(
                 builder: (context, provider, _) {
                   final List<ProductModel> productList = provider.popularProductList;
                   if(provider.initialLoading){
@@ -145,6 +161,8 @@ class _HomeScreenState extends State<HomeScreen> {
       Navigator.pushNamed(context, SignUpScreen.name);
     }
   }
+  
+  
 }
 
 

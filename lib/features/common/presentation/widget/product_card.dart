@@ -51,7 +51,7 @@ class ProductCard extends StatelessWidget {
                         topRight: .circular(8),
                         topLeft: .circular(8)
                     ),
-                    image: DecorationImage(image: NetworkImage(product.photo), fit: .cover,)
+                    image: DecorationImage(image: NetworkImage(product.photo,), fit: .cover,)
                 ),
               ),
               Padding(

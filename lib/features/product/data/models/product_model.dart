@@ -16,6 +16,7 @@ class ProductModel {
   final String photo;
   final int currentPrice;
 
+
   ProductModel({
     required this.id,
     required this.title,
@@ -24,10 +25,13 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
+    String defaultImageUrl = "https://www.pngmart.com/files/23/Error-PNG.png";
+    final List photos = json['photos'] ?? [];
+
     return ProductModel(
       id: json['_id'],
       title: json['title'],
-      photo: json['photos'][0],  // TODO: find a better way to handle null or empty list
+      photo: photos.isNotEmpty ? photos.first : defaultImageUrl,  // TODO: find a better way to handle null or empty list
       currentPrice: json['current_price'],
     );
   }
