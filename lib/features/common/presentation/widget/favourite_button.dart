@@ -3,7 +3,7 @@ import 'package:crafty_bay/features/common/presentation/widget/center_circular_p
 import 'package:crafty_bay/features/common/presentation/widget/snack_bar_message.dart';
 import 'package:crafty_bay/features/product/presentation/providers/product_list_by_category_provider.dart';
 import 'package:crafty_bay/features/wish_list/data/models/wish_list_model.dart';
-import 'package:crafty_bay/features/wish_list/presentation/providers/get_wish_list_provider.dart';
+import 'package:crafty_bay/features/wish_list/presentation/providers/wish_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +52,17 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                   }
 
                 }
-                return Icon(Icons.favorite_border_outlined, color: Colors.white, size: 18,);
+                return Consumer<WishListProvider>(
+                  builder: (context, provider, _) {
+                    if(provider.wishListItemDeleteInProgress){
+                      return SizedBox(
+                          width: 18,
+                          height: 18,
+                          child: Center(child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2,),));
+                    }
+                    return Icon(Icons.favorite_border_outlined, color: Colors.white, size: 18,);
+                  }
+                );
               }
             )),
       ),

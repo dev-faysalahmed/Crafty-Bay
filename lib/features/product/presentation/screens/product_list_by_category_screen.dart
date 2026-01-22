@@ -69,7 +69,7 @@ class _ProductListByCategoryScreenState
                 ),
                 itemBuilder: (context, index) {
                   final product = _productListByCategoryProvider.productList[index];
-                  return FittedBox(child: ProductCard(product: product, onTapFavourite: _onTapAddWishList,));
+                  return FittedBox(child: ProductCard(product: product, onTapFavourite: _onTapAddWishList, fromWishList: false));
                 },
               ),
             );

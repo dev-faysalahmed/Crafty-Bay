@@ -12,7 +12,7 @@ import 'package:crafty_bay/features/product/presentation/providers/product_detai
 import 'package:crafty_bay/features/product/widgets/color_picker.dart';
 import 'package:crafty_bay/features/product/widgets/product_image_slider.dart';
 import 'package:crafty_bay/features/product/widgets/size_picker.dart';
-import 'package:crafty_bay/features/wish_list/presentation/providers/get_wish_list_provider.dart';
+import 'package:crafty_bay/features/wish_list/presentation/providers/wish_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,11 +20,13 @@ import '../../../../app/app_color.dart';
 import '../../../../app/constants.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key, required this.productId});
+  const ProductDetailsScreen({super.key, required this.productId, required this.fromWishList, this.wishListId});
 
   static const name = '/product-details';
 
   final String productId;
+  final bool fromWishList;
+  final String? wishListId;
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -213,30 +215,42 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   Future<void> _onTapAddToCartButton() async {
-    if(await AuthController.isAlreadyLoggedIn()){
-      // TODO: call add to cart api
-      final bool isSuccess = await _addToCartProvider.addToCart(widget.productId, quantity);
-      if(isSuccess){
-        showSnackBarMessage(context, 'Added to cart!');
+      if(await AuthController.isAlreadyLoggedIn()){
+        // TODO: call add to cart api
+        final bool isSuccess = await _addToCartProvider.addToCart(widget.productId, quantity);
+        if(isSuccess){
+          showSnackBarMessage(context, 'Added to cart!');
+        }else{
+          showSnackBarMessage(context, _addToCartProvider.errorMessage!);
+        }
       }else{
-        showSnackBarMessage(context, _addToCartProvider.errorMessage!);
+        Navigator.pushNamed(context, SignUpScreen.name);
       }
-    }else{
-      Navigator.pushNamed(context, SignUpScreen.name);
-    }
+
   }
 
   Future<void> _onTapAddWishList() async {
-    if(await AuthController.isAlreadyLoggedIn()){
-      final bool isSuccess = await context.read<AddWishListProvider>().addWishList(productId: widget.productId);
+
+    if(widget.fromWishList){
+      bool isSuccess = await context.read<WishListProvider>().deleteWishListItem(wishListId: widget.wishListId!);
       if(isSuccess){
-        showSnackBarMessage(context, 'Added to wish list!');
-      }else{
-        showSnackBarMessage(context, context.read<AddWishListProvider>().errorMessage!);
+        showSnackBarMessage(context, 'Delete from Wishlist!');
+        context.read<WishListProvider>().loadInitialWishList();
+        Navigator.pop(context);
       }
     }else{
-      Navigator.pushNamed(context, SignUpScreen.name);
+      if(await AuthController.isAlreadyLoggedIn()){
+        final bool isSuccess = await context.read<AddWishListProvider>().addWishList(productId: widget.productId);
+        if(isSuccess){
+          showSnackBarMessage(context, 'Added to wish list!');
+        }else{
+          showSnackBarMessage(context, context.read<AddWishListProvider>().errorMessage!);
+        }
+      }else{
+        Navigator.pushNamed(context, SignUpScreen.name);
+      }
     }
+
   }
 
 

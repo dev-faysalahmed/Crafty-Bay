@@ -1,7 +1,7 @@
 import 'package:crafty_bay/features/common/presentation/providers/main_nav_container_provider.dart';
 import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
 import 'package:crafty_bay/features/wish_list/data/models/wish_list_model.dart';
-import 'package:crafty_bay/features/wish_list/presentation/providers/get_wish_list_provider.dart';
+import 'package:crafty_bay/features/wish_list/presentation/providers/wish_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../auth/presentation/providers/auth_controller.dart';
@@ -22,16 +22,17 @@ class _WishListScreenState extends State<WishListScreen> {
   @override
   void initState() {
     super.initState();
+    context.read<WishListProvider>().loadInitialWishList();
     _scrollController.addListener(_loadMoreData);
   }
 
   void _loadMoreData(){
-    if(context.read<GetWishListProvider>().moreLoading){
+    if(context.read<WishListProvider>().moreLoading){
       return;
     }
 
     if(_scrollController.position.extentBefore < 300){
-      context.read<GetWishListProvider>().fetchWishList();
+      context.read<WishListProvider>().fetchWishList();
     }
   }
 
@@ -51,7 +52,7 @@ class _WishListScreenState extends State<WishListScreen> {
             Text('Wish List'),
           ],
         )),
-        body: Consumer<GetWishListProvider>(
+        body: Consumer<WishListProvider>(
           builder: (context, provider, _) {
 
             if(provider.initialLoading){
@@ -61,21 +62,30 @@ class _WishListScreenState extends State<WishListScreen> {
             return Column(
               children: [
                 Expanded(
-                  child: GridView.builder(
-                    controller: _scrollController,
-                    itemCount: provider.wishList.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisSpacing: 8,
-                        crossAxisSpacing: 0
-                    ),
-                    itemBuilder: (context, index) {
-                      WishListModel model = provider.wishList[index];
-                      return FittedBox(child: ProductCard(product: model.productModel, onTapFavourite: () => onTapFavouriteIcon(wishListId: model.id),));
-                    },
+                  child: Consumer<WishListProvider>(
+                    builder: (context, provider, _) {
+
+                      if(provider.initialLoading){
+                        return CenterCircularProgress();
+                      }
+
+                      return GridView.builder(
+                        controller: _scrollController,
+                        itemCount: provider.wishList.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 0
+                        ),
+                        itemBuilder: (context, index) {
+                          WishListModel model = provider.wishList[index];
+                          return FittedBox(child: ProductCard(product: model.productModel, onTapFavourite: () => onTapFavouriteIcon(wishListId: model.id), fromWishList: true, wishListId: model.id,));
+                        },
+                      );
+                    }
                   ),
                 ),
-                if(context.read<GetWishListProvider>().moreLoading)
+                if(context.read<WishListProvider>().moreLoading)
                   CenterCircularProgress(),
               ],
             );
@@ -86,6 +96,6 @@ class _WishListScreenState extends State<WishListScreen> {
   }
 
   void onTapFavouriteIcon({required String wishListId}){
-    //context.read<GetWishListProvider>().deleteWishList(wishListId: wishListId);
+    context.read<WishListProvider>().deleteWishListItem(wishListId: wishListId);
   }
 }

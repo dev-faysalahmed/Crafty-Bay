@@ -5,7 +5,7 @@ import 'package:crafty_bay/features/category/data/models/category_model.dart';
 import 'package:crafty_bay/features/wish_list/data/models/wish_list_model.dart';
 import 'package:flutter/material.dart';
 
-class GetWishListProvider extends ChangeNotifier{
+class WishListProvider extends ChangeNotifier{
 
   final int _pageSize = 18;
   int _currentPageNo = 0;
@@ -67,6 +67,27 @@ class GetWishListProvider extends ChangeNotifier{
     _currentPageNo = 0;
     _lastPageNo = null;
     await fetchWishList();
+  }
+
+  bool _wishListItemDeleteInProgress = false;
+  bool get wishListItemDeleteInProgress => _wishListItemDeleteInProgress;
+  
+  Future<bool> deleteWishListItem({required String wishListId})async{
+    bool isSuccess = false;
+    _wishListItemDeleteInProgress = true;
+    notifyListeners();
+    
+    NetworkResponse response = await getNetworkCaller().deleteRequest(url: Urls.deleteWishListItemUrl(wishListId));
+
+    _wishListItemDeleteInProgress = false;
+    notifyListeners();
+
+    if(response.isSuccess){
+      isSuccess = true;
+    }
+
+    return isSuccess;
+
   }
 
 }

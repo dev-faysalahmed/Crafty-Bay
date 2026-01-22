@@ -27,8 +27,11 @@ class AppRoutes {
       final CategoryModel categoryModel = settings.arguments as CategoryModel;
       widget = ProductListByCategoryScreen(categoryModel: categoryModel,);
     }else if(settings.name == ProductDetailsScreen.name){
-      final String productId = settings.arguments as String;
-      widget = ProductDetailsScreen(productId: productId,);
+      final Map<String, dynamic> map = settings.arguments as Map<String, dynamic>;
+      final String productId = map['productId'];
+      final bool fromWishList = map['fromWishList'];
+      final String? wishListId = map['wishListId'];
+      widget = ProductDetailsScreen(productId: productId, fromWishList: fromWishList, wishListId: wishListId ?? '',);
     }
 
     return MaterialPageRoute(builder: (context) => widget);

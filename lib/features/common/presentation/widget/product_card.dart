@@ -12,17 +12,24 @@ import 'favourite_button.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    super.key, required this.product, required this.onTapFavourite,
+    super.key, required this.product, required this.onTapFavourite, required this.fromWishList, this.wishListId,
   });
 
   final ProductModel product;
   final VoidCallback onTapFavourite;
+  final bool fromWishList;
+  final String? wishListId;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, ProductDetailsScreen.name, arguments: product.id);
+        Map<String, dynamic> arguments = {
+          "productId" : product.id,
+          "fromWishList" : fromWishList,
+          "wishListId" : wishListId
+        };
+        Navigator.pushNamed(context, ProductDetailsScreen.name, arguments: arguments, );
       },
       child: SizedBox(
         width: 150,
