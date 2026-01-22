@@ -15,5 +15,6 @@ class Urls {
   static String deleteCartItemUrl(String cartId) => '$_baseUrl/cart/$cartId';
   static String deleteWishListItemUrl(String wishListId) => '$_baseUrl/wishlist/$wishListId';
   static String getWishListUrl(int count, int page) => '$_baseUrl/wishlist?count=$count&page=$page';
+  static String getProductListBySlugUrl(int count, int page, String slug) => '$_baseUrl/products?count=$count&page=$page&category=$slug';
 
 }

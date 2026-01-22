@@ -4,6 +4,7 @@ import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dar
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:crafty_bay/features/cart/presentation/screens/cart_list_screen.dart';
 import 'package:crafty_bay/features/category/presentation/screens/category_list_screen.dart';
+import 'package:crafty_bay/features/home/presantation/providers/get_popular_item_provider.dart';
 import 'package:crafty_bay/features/home/presantation/providers/home_slider_provider.dart';
 import 'package:crafty_bay/features/home/presantation/screens/home_screen.dart';
 import 'package:crafty_bay/features/wish_list/presentation/providers/wish_list_provider.dart';
@@ -37,6 +38,7 @@ class _MainNavHolderScreenState extends State<MainNavHolderScreen> {
     super.initState();
     context.read<CategoryListProvider>().fetchCategoryList();
     context.read<HomeSliderProvider>().getHomeSlider();
+    context.read<GetPopularItemProvider>().loadInitialPopularList();
   }
 
   @override
