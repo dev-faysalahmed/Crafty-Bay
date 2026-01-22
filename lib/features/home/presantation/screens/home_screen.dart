@@ -5,6 +5,7 @@ import 'package:crafty_bay/features/auth/presentation/screens/sign_in_screen.dar
 import 'package:crafty_bay/features/category/data/models/category_model.dart';
 import 'package:crafty_bay/features/category/presentation/providers/category_list_provider.dart';
 import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
+import 'package:crafty_bay/features/home/presantation/providers/home_products_provider.dart';
 import 'package:crafty_bay/features/product/presentation/providers/product_list_by_slug_provider.dart';
 import 'package:crafty_bay/features/home/presantation/providers/home_slider_provider.dart';
 import 'package:crafty_bay/features/product/presentation/screens/product_list_by_slug_screen.dart';
@@ -74,13 +75,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 Map<String, dynamic> map = {"title":"Special", "slug":"67c35b395e8a445235de197e"};
                 Navigator.pushNamed(context, ProductListBySlugScreen.name, arguments: map);
               }),
-              _buildPopularProductList(),
+              _buildSpecialProductList(),
               SectionHeader(title: 'New', onTapSeeAll: () {
                 Map<String, dynamic> map = {"title":"New Arrival", "slug":"67c7bec4623a876bc4766fea"};
                 Navigator.pushNamed(context, ProductListBySlugScreen.name, arguments: map);
 
               }),
-              _buildPopularProductList(),
+              _buildNewProductList(),
 
             ],
           ),
@@ -92,10 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildPopularProductList() {
     return SizedBox(
               height: 170,
-              child: Consumer<ProductListBySlugProvider>(
+              child: Consumer<HomeProductsProvider>(
                 builder: (context, provider, _) {
                   final List<ProductModel> productList = provider.popularProductList;
-                  if(provider.initialLoading){
+                  if(provider.getPopularListInProgress){
                     return CenterCircularProgress();
                   }
                   return ListView.builder(
@@ -108,6 +109,48 @@ class _HomeScreenState extends State<HomeScreen> {
                 }
               ),
             );
+  }
+
+  Widget _buildSpecialProductList() {
+    return SizedBox(
+      height: 170,
+      child: Consumer<HomeProductsProvider>(
+          builder: (context, provider, _) {
+            final List<ProductModel> productList = provider.specialProductList;
+            if(provider.getSpecialListInProgress){
+              return CenterCircularProgress();
+            }
+            return ListView.builder(
+              scrollDirection: .horizontal,
+              itemCount: productList.length,
+              itemBuilder: (context, index) {
+                final product = productList[index];
+                return ProductCard(product: product, onTapFavourite: () { _onTapAddWishList(productId: product.id); }, fromWishList: false,);
+              },);
+          }
+      ),
+    );
+  }
+
+  Widget _buildNewProductList() {
+    return SizedBox(
+      height: 170,
+      child: Consumer<HomeProductsProvider>(
+          builder: (context, provider, _) {
+            final List<ProductModel> productList = provider.newProductList;
+            if(provider.getNewListInProgress){
+              return CenterCircularProgress();
+            }
+            return ListView.builder(
+              scrollDirection: .horizontal,
+              itemCount: productList.length,
+              itemBuilder: (context, index) {
+                final product = productList[index];
+                return ProductCard(product: product, onTapFavourite: () { _onTapAddWishList(productId: product.id); }, fromWishList: false,);
+              },);
+          }
+      ),
+    );
   }
 
 
@@ -131,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
   }
+
 
   AppBar _buildAppBar() {
     return AppBar(

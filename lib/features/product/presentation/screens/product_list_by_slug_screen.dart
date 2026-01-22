@@ -36,7 +36,7 @@ class _ProductListBySlugScreenState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _productListBySlugProvider.loadInitialPopularList(widget.slug);
+      _productListBySlugProvider.loadInitialProductList(widget.slug);
       _scrollController.addListener(_loadMoreData);
     },);
   }
@@ -47,7 +47,7 @@ class _ProductListBySlugScreenState
     }
 
     if(_scrollController.position.extentBefore < 300){
-      _productListBySlugProvider.fetchPopularProductList(widget.slug);
+      _productListBySlugProvider.fetchProductList(widget.slug);
     }
   }
 
@@ -69,14 +69,14 @@ class _ProductListBySlugScreenState
                   Expanded(
                     child: GridView.builder(
                       controller: _scrollController,
-                      itemCount: _productListBySlugProvider.popularProductList.length,
+                      itemCount: _productListBySlugProvider.productList.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         mainAxisSpacing: 8,
                         crossAxisSpacing: 0
                       ),
                       itemBuilder: (context, index) {
-                        final product = _productListBySlugProvider.popularProductList[index];
+                        final product = _productListBySlugProvider.productList[index];
                         return FittedBox(child: ProductCard(product: product, onTapFavourite: ()=> _onTapAddWishList(productId: product.id), fromWishList: false));
                       },
                     ),
