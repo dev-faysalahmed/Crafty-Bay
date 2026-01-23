@@ -12,6 +12,7 @@ import 'package:crafty_bay/features/product/presentation/providers/product_detai
 import 'package:crafty_bay/features/product/widgets/color_picker.dart';
 import 'package:crafty_bay/features/product/widgets/product_image_slider.dart';
 import 'package:crafty_bay/features/product/widgets/size_picker.dart';
+import 'package:crafty_bay/features/product_review/presentation/screens/review_screen.dart';
 import 'package:crafty_bay/features/wish_list/presentation/providers/wish_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ import '../../../../app/constants.dart';
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({super.key, required this.productId, required this.fromWishList, this.wishListId});
 
-  static const name = '/product-details';
+  static const String name = '/product-details';
 
   final String productId;
   final bool fromWishList;
@@ -112,7 +113,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 children: [
                                   RatingView(),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      _onTapReviewButton();
+                                    },
                                     child: Text('Reviews'),
                                   ),
                                   FavouriteButton(productId: widget.productId, onTapFavoriteIcon: _onTapAddWishList,),
@@ -251,6 +254,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       }
     }
 
+  }
+
+  void _onTapReviewButton(){
+    Navigator.pushNamed(context, ReviewScreen.name, arguments: widget.productId);
   }
 
 
