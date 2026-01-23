@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 
 class ReviewCard extends StatelessWidget {
   const ReviewCard({
-    super.key, required this.model, required this.index,
+    super.key, required this.model,
   });
 
   final ReviewModel model;
-  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class ReviewCard extends StatelessWidget {
               children: [
                 CircleAvatar(backgroundColor: Colors.grey.withAlpha(100), radius: 16, child: Icon(Icons.person_outline,),),
                 SizedBox(width: 8,),
-                Text('${model.firstName} ${model.lastName} (${index+1})', style: TextStyle(color: Colors.black, fontWeight: .w600),)
+                Text('${model.firstName} ${model.lastName}', style: TextStyle(color: Colors.black, fontWeight: .w600),)
               ],
             ),
             SizedBox(height: 8,),

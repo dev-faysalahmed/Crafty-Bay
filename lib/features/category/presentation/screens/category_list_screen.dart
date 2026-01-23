@@ -29,7 +29,7 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
       return;
     }
 
-    if(_scrollController.position.extentBefore < 300){
+    if(_scrollController.position.extentAfter < 300){
       context.read<CategoryListProvider>().fetchCategoryList();
     }
   }

@@ -8,6 +8,7 @@ import 'package:crafty_bay/features/common/presentation/providers/add_wish_list_
 import 'package:crafty_bay/features/home/presantation/providers/home_products_provider.dart';
 import 'package:crafty_bay/features/product/presentation/providers/product_list_by_slug_provider.dart';
 import 'package:crafty_bay/features/home/presantation/providers/home_slider_provider.dart';
+import 'package:crafty_bay/features/product_review/presentation/providers/review_provider.dart';
 import 'package:crafty_bay/features/wish_list/presentation/providers/wish_list_provider.dart';
 import 'package:crafty_bay/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,7 @@ class _CraftyBayAppState extends State<CraftyBayApp> {
         ChangeNotifierProvider(create: (context) => AddWishListProvider()),
         ChangeNotifierProvider(create: (context) => WishListProvider()),
         ChangeNotifierProvider(create: (context) => HomeProductsProvider()),
+        ChangeNotifierProvider(create: (context) => ReviewProvider()),
 
       ],
       child: Consumer<LanguageProvider>(

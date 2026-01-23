@@ -31,7 +31,7 @@ class _WishListScreenState extends State<WishListScreen> {
       return;
     }
 
-    if(_scrollController.position.extentBefore < 300){
+    if(_scrollController.position.extentAfter < 300){
       context.read<WishListProvider>().fetchWishList();
     }
   }

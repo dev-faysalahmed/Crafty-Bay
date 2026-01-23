@@ -46,7 +46,7 @@ class _ProductListBySlugScreenState
       return;
     }
 
-    if(_scrollController.position.extentBefore < 300){
+    if(_scrollController.position.extentAfter < 300){
       _productListBySlugProvider.fetchProductList(widget.slug);
     }
   }

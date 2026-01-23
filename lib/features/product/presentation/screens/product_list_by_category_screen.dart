@@ -43,7 +43,7 @@ class _ProductListByCategoryScreenState
       return;
     }
 
-    if(_scrollController.position.extentBefore < 300){
+    if(_scrollController.position.extentAfter < 300){
       _productListByCategoryProvider.fetchProductList(widget.categoryModel.id);
     }
   }
