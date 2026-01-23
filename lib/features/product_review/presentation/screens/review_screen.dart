@@ -1,6 +1,7 @@
 import 'package:crafty_bay/features/auth/presentation/providers/auth_controller.dart';
 import 'package:crafty_bay/features/auth/presentation/screens/sign_up_screen.dart';
 import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
+import 'package:crafty_bay/features/product_review/data/models/review_model.dart';
 import 'package:crafty_bay/features/product_review/presentation/providers/review_provider.dart';
 import 'package:crafty_bay/features/product_review/presentation/screens/add_review_screen.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                           controller: _scrollController,
                           itemCount: provider.reviewList.length,
                           itemBuilder: (context, index) {
-                          return ReviewCard(model: provider.reviewList[index]);
+                          return ReviewCard(model: provider.reviewList[index], productId: widget.productId,);
                         },),
                       ),
                     ),
@@ -129,7 +130,11 @@ class _ReviewScreenState extends State<ReviewScreen> {
 
   void _onTapCreateReviewButton()async{
     if(await AuthController.isAlreadyLoggedIn()){
-      Navigator.pushNamed(context, AddReviewScreen.name, arguments: widget.productId);
+      Map<String, dynamic> map = {
+        "productId" : widget.productId,
+        "reviewModel" : null
+      };
+      Navigator.pushNamed(context, AddReviewScreen.name, arguments:map);
     }else{
       Navigator.pushNamed(context, SignUpScreen.name);
     }

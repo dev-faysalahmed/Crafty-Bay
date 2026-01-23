@@ -4,6 +4,7 @@ class ReviewModel {
   final String lastName;
   final String userId;
   final String review;
+  final int rating;
 
   ReviewModel({
     required this.id,
@@ -11,6 +12,7 @@ class ReviewModel {
     required this.lastName,
     required this.userId,
     required this.review,
+    required this.rating,
   });
 
   factory ReviewModel.fromJson(Map<String, dynamic> json){
@@ -20,6 +22,7 @@ class ReviewModel {
         lastName: json['user']['last_name'],
         userId: json['user']['_id'],
         review: json['comment'],
+        rating: json['rating']
     );
   }
 }

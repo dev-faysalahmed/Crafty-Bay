@@ -1,16 +1,20 @@
 import 'package:crafty_bay/features/common/presentation/widget/center_circular_progress.dart';
-import 'package:crafty_bay/features/common/presentation/widget/snack_bar_message.dart';
+import 'package:crafty_bay/features/product_review/data/models/review_model.dart';
 import 'package:crafty_bay/features/product_review/presentation/providers/add_review_provider.dart';
 import 'package:crafty_bay/features/product_review/presentation/providers/review_provider.dart';
+import 'package:crafty_bay/features/product_review/presentation/providers/update_review_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../common/presentation/widget/snack_bar_message.dart';
+
 class AddReviewScreen extends StatefulWidget {
-  const AddReviewScreen({super.key, required this.productId});
+  const AddReviewScreen({super.key, required this.productId, this.reviewModel});
 
   static const String name = '/add-review';
 
   final String productId;
+  final ReviewModel? reviewModel;
 
   @override
   State<AddReviewScreen> createState() => _AddReviewScreenState();
@@ -18,14 +22,27 @@ class AddReviewScreen extends StatefulWidget {
 
 class _AddReviewScreenState extends State<AddReviewScreen> {
   final AddReviewProvider _addReviewProvider = AddReviewProvider();
+  final UpdateReviewProvider _updateReviewProvider = UpdateReviewProvider();
 
   final TextEditingController _reviewTEController = TextEditingController();
   final TextEditingController _ratingTEController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    if(widget.reviewModel != null){
+      _reviewTEController.text = widget.reviewModel!.review;
+      _ratingTEController.text = widget.reviewModel!.rating.toString();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => _addReviewProvider,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => _addReviewProvider,),
+        ChangeNotifierProvider(create: (context) => _updateReviewProvider,),
+      ],
       child: Scaffold(
         appBar: AppBar(title: Text('Create Review')),
         body: SingleChildScrollView(
@@ -50,12 +67,12 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                   keyboardType: .number,
                 ),
                 SizedBox(height: 16),
-                Consumer<AddReviewProvider>(
-                  builder: (context, _, _) {
-                    if (_addReviewProvider.addReviewInProgress) {
+                Consumer2<AddReviewProvider, UpdateReviewProvider>(
+                  builder: (context, _, _, _) {
+                    if (_addReviewProvider.addReviewInProgress || _updateReviewProvider.updateReviewInProgress) {
                       return CenterCircularProgress();
                     }
-                    return FilledButton(onPressed: _onTapSubmitButton, child: Text('Submit'));
+                    return FilledButton(onPressed: _onTapSubmitButton, child: Text((widget.reviewModel != null) ? "Update" : 'Submit'));
                   },
                 ),
               ],
@@ -67,19 +84,40 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
   }
 
   Future<void> _onTapSubmitButton() async {
-    bool isSuccess = await _addReviewProvider.addReview(
-      productId: widget.productId,
-      review: _reviewTEController.text.trim(),
-      rating: _ratingTEController.text.trim(),
-    );
 
-    if(isSuccess){
-      showSnackBarMessage(context, 'Add Review Success!');
-      context.read<ReviewProvider>().loadInitialReviewList(widget.productId);
-      Navigator.pop(context);
+    if(widget.reviewModel != null){
+
+      bool isSuccess = await _updateReviewProvider.updateReview(
+        reviewId: widget.reviewModel!.id,
+        newReview: _reviewTEController.text.trim(),
+        rating: _ratingTEController.text.trim(),
+      );
+
+      if(isSuccess){
+        showSnackBarMessage(context, 'update Review Success!');
+        context.read<ReviewProvider>().loadInitialReviewList(widget.productId);
+        Navigator.pop(context);
+      }else{
+        showSnackBarMessage(context, _addReviewProvider.errorMessage!);
+      }
+
+
     }else{
-      showSnackBarMessage(context, _addReviewProvider.errorMessage!);
+      bool isSuccess = await _addReviewProvider.addReview(
+        productId: widget.productId,
+        review: _reviewTEController.text.trim(),
+        rating: _ratingTEController.text.trim(),
+      );
+
+      if(isSuccess){
+        showSnackBarMessage(context, 'Add Review Success!');
+        context.read<ReviewProvider>().loadInitialReviewList(widget.productId);
+        Navigator.pop(context);
+      }else{
+        showSnackBarMessage(context, _addReviewProvider.errorMessage!);
+      }
     }
+
   }
 
   @override
