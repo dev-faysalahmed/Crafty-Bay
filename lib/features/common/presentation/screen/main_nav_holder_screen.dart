@@ -37,11 +37,14 @@ class _MainNavHolderScreenState extends State<MainNavHolderScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<CategoryListProvider>().fetchCategoryList();
-    context.read<HomeSliderProvider>().getHomeSlider();
-    context.read<HomeProductsProvider>().getPopularProductList();
-    context.read<HomeProductsProvider>().getSpecialProductList();
-    context.read<HomeProductsProvider>().getNewProductList();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<CategoryListProvider>().fetchCategoryList();
+      context.read<HomeSliderProvider>().getHomeSlider();
+      context.read<HomeProductsProvider>().getPopularProductList();
+      context.read<HomeProductsProvider>().getSpecialProductList();
+      context.read<HomeProductsProvider>().getNewProductList();
+    },);
+
   }
 
   @override

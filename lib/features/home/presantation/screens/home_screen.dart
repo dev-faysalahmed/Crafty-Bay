@@ -103,6 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return ListView.builder(
                     scrollDirection: .horizontal,
                     itemCount: productList.length,
+                    reverse: true,
                     itemBuilder: (context, index) {
                       final product = productList[index];
                     return ProductCard(product: product, onTapFavourite: () { _onTapAddWishList(productId: product.id); }, fromWishList: false,);
@@ -124,6 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return ListView.builder(
               scrollDirection: .horizontal,
               itemCount: productList.length,
+              reverse: true,
               itemBuilder: (context, index) {
                 final product = productList[index];
                 return ProductCard(product: product, onTapFavourite: () { _onTapAddWishList(productId: product.id); }, fromWishList: false,);
