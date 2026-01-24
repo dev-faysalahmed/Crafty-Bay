@@ -12,6 +12,7 @@ import 'package:crafty_bay/features/product/presentation/screens/product_list_by
 import 'package:crafty_bay/features/home/presantation/widget/home_carousel_slider.dart';
 import 'package:crafty_bay/features/product/data/models/product_model.dart';
 import 'package:crafty_bay/features/product/presentation/screens/product_list_by_category_screen.dart';
+import 'package:crafty_bay/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -183,9 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           SvgPicture.asset(AssetsPaths.vanLogoSvg),
           Spacer(),
-          CircleIconButton(icon: Icons.person, onTap: () {
-            Navigator.pushNamed(context, SignInScreen.name);
-          }),
+          CircleIconButton(icon: Icons.person, onTap: _onTapProfileIconButton),
           CircleIconButton(icon: Icons.call, onTap: () {}),
           CircleIconButton(icon: Icons.notifications_active, onTap: () {}),
         ],
@@ -201,6 +200,14 @@ class _HomeScreenState extends State<HomeScreen> {
       }else{
         showSnackBarMessage(context, context.read<AddWishListProvider>().errorMessage!);
       }
+    }else{
+      Navigator.pushNamed(context, SignUpScreen.name);
+    }
+  }
+
+  Future<void> _onTapProfileIconButton() async {
+    if(await AuthController.isAlreadyLoggedIn()){
+      Navigator.pushNamed(context, ProfileScreen.name);
     }else{
       Navigator.pushNamed(context, SignUpScreen.name);
     }

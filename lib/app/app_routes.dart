@@ -9,6 +9,7 @@ import 'package:crafty_bay/features/product/presentation/screens/product_list_by
 import 'package:crafty_bay/features/product_review/data/models/review_model.dart';
 import 'package:crafty_bay/features/product_review/presentation/screens/add_review_screen.dart';
 import 'package:crafty_bay/features/product_review/presentation/screens/review_screen.dart';
+import 'package:crafty_bay/features/profile/presentation/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../features/common/presentation/screen/main_nav_holder_screen.dart';
@@ -49,6 +50,8 @@ class AppRoutes {
       final String productId = map['productId'];
       final ReviewModel? model = map['reviewModel'];
       widget = AddReviewScreen(productId: productId, reviewModel: model,);
+    }else if(settings.name == ProfileScreen.name){
+      widget = ProfileScreen();
     }
 
     return MaterialPageRoute(builder: (context) => widget);
