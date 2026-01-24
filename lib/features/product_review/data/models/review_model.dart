@@ -4,7 +4,7 @@ class ReviewModel {
   final String lastName;
   final String userId;
   final String review;
-  final int rating;
+  final int? rating;
 
   ReviewModel({
     required this.id,
@@ -22,7 +22,7 @@ class ReviewModel {
         lastName: json['user']['last_name'],
         userId: json['user']['_id'],
         review: json['comment'],
-        rating: json['rating']
+        rating: json['rating'] ?? 0
     );
   }
 }

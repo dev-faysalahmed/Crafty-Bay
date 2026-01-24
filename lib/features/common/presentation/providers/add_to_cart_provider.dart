@@ -11,7 +11,7 @@ class AddToCartProvider extends ChangeNotifier{
   String? _errorMessage;
   String?  get errorMessage => _errorMessage;
 
-  Future<bool> addToCart(String productId, int quantity)async{
+  Future<bool> addToCart({required String productId, required int quantity, String? color, String? size})async{
     bool isSuccess = false;
 
     _addToCartInProgress = true;
@@ -20,8 +20,8 @@ class AddToCartProvider extends ChangeNotifier{
     Map<String, dynamic> requestBody = {
       "product" : productId,
       "quantity" : quantity,
-      //"color" : "Blue",
-      //"size" : "XL"
+      "color" : color,
+      "size" : size
     };
 
     final NetworkResponse response = await getNetworkCaller().postRequest(url: Urls.addToCartUrl, body: requestBody);

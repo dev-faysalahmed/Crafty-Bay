@@ -38,6 +38,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       ProductDetailsProvider();
 
   int quantity = 1;
+  String? size;
+  String? color;
 
   final AddToCartProvider _addToCartProvider = AddToCartProvider();
 
@@ -131,7 +133,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         .productDetailsModel
                                         ?.colors ??
                                     [],
-                                onChange: (selectedColor) {},
+                                onChange: (selectedColor) {
+                                  color = selectedColor;
+                                },
                               ),
                               if (_productDetailsProvider.productDetailsModel?.sizes.isNotEmpty ?? false)
 
@@ -150,7 +154,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         .productDetailsModel
                                         ?.sizes ??
                                     [],
-                                onChange: (selectedSize) {},
+                                onChange: (selectedSize) {
+                                  size = selectedSize;
+                                },
                               ),
                               const SizedBox(height: 16),
                               Text('Description', style: textTheme.titleMedium),
@@ -220,7 +226,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Future<void> _onTapAddToCartButton() async {
       if(await AuthController.isAlreadyLoggedIn()){
         // TODO: call add to cart api
-        final bool isSuccess = await _addToCartProvider.addToCart(widget.productId, quantity);
+        final bool isSuccess = await _addToCartProvider.addToCart(productId: widget.productId, quantity: quantity, size: size, color: color);
         if(isSuccess){
           showSnackBarMessage(context, 'Added to cart!');
         }else{
